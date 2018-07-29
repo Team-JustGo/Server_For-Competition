@@ -23,6 +23,12 @@
 
 ## URL
 
+### GET api/docs
+
+- Description: Swagger API Docs
+- Request Body
+
+
 ### POST api/user/login
 
 - Description: 페이스북 및 카카오 계정으로 로그인하기(웹 메인 페이지 통합)
@@ -139,3 +145,151 @@ comment: String
 
 ~~신고기능은 추후구현~~
 
+### [POST] api/user/tour-spot
+
+- Description: 유저가 갔다온 장소 저장
+- Request Body 
+```
+transport : Number
+    - 도보: 0
+    - 대중교통: 1
+    - 자동차: 2
+lat : Number
+lng : Number
+theme : String (ex. 자연,힐링,!사랑,먹거리장터,특화거리)
+minTime: Number (분 단위)
+maxTime: Number (분 단위)
+```
+- 성공시
+```
+StatusCode : 200
+{
+    그 관광지의 위도 경도같이 보내줘야함
+}
+```
+- 실패시  
+```
+{
+    나중에
+}
+```
+
+### [PUT] api/user/profile-image/:id
+
+- Description: 프로필 이미지 변경
+- Request Body 
+```
+transport : Number
+    - 도보: 0
+    - 대중교통: 1
+    - 자동차: 2
+lat : Number
+lng : Number
+theme : String (ex. 자연,힐링,!사랑,먹거리장터,특화거리)
+minTime: Number (분 단위)
+maxTime: Number (분 단위)
+```
+- 성공시
+```
+StatusCode : 200
+{
+    그 관광지의 위도 경도같이 보내줘야함
+}
+```
+- 실패시  
+```
+{
+    나중에
+}
+```
+
+### [PUT] api/user/profile-name/:id
+
+- Description: 프로필 네임 변경
+- Request Body 
+```
+transport : Number
+    - 도보: 0
+    - 대중교통: 1
+    - 자동차: 2
+lat : Number
+lng : Number
+theme : String (ex. 자연,힐링,!사랑,먹거리장터,특화거리)
+minTime: Number (분 단위)
+maxTime: Number (분 단위)
+```
+- 성공시
+```
+StatusCode : 200
+{
+    그 관광지의 위도 경도같이 보내줘야함
+}
+```
+- 실패시  
+```
+{
+    나중에
+}
+```
+
+### [GET] api/travel/direction
+
+- Description: 경로 얻기
+- Request Body 
+```
+transport : Number
+    - 도보: 0
+    - 대중교통: 1
+    - 자동차: 2
+lat : Number
+lng : Number
+theme : String (ex. 자연,힐링,!사랑,먹거리장터,특화거리)
+minTime: Number (분 단위)
+maxTime: Number (분 단위)
+```
+- 성공시
+```
+StatusCode : 200
+{
+    그 관광지의 위도 경도같이 보내줘야함
+}
+```
+- 실패시  
+```
+{
+    나중에
+}
+```
+
+## DB
+
+```
+user
+{
+    userId: 고유한 식별번호 - 있는지
+    profileName: 닉네임
+    profileImage: 프로필 사진 URL
+    wentSpot:
+    [{
+        tourId: 갔던 관광지 아이디
+    }]
+}
+contact
+{
+    name: 이름
+    email: 이메일
+    phone: 전화번호
+    content: 내용
+}
+tourspot
+{
+    tourId: 관광지아이디
+    comment:
+    [{
+        userId: 유저아이디
+        date: 작성일자
+        rate: 별점
+        content: 내용
+    }]
+}
+```
