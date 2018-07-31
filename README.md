@@ -21,33 +21,145 @@
 
 ## URL
 
-### GET api/docs
+### 공통 응답
 
-- Description: Swagger API Docs
+```
+Response Description: 모든 응답에 result
+StatusCode: *
+{
+    result: ‘success’/’failure’
+}
+
+Response Description: 서버오류
+StatusCode: 500
+{
+   result: ‘failure’
+}
+```
+
+### ~~GET api/docs~~ (Deprecated)
+
+- URL Description: Swagger API Docs
 - Request Body
+```
+none
+```
+- Response Body
+```
+Response Desription: 성공
+StatusCode: 200
+{ Awesome-Swagger-UI }
+```
 
 
 ### POST api/user/login
 
-- Description: 페이스북 및 카카오 계정으로 로그인하기(웹 메인 페이지 통합)
+- URL Description: 페이스북 및 카카오 계정으로 로그인하기(웹 메인 페이지 통합)
 - Request Body
 ```
 userId(사용자 식별 가능한 고유번호)
 ```
-- 성공시
+- Response Body
 ```
+Response Description: 로그인 성공
 StatusCode : 200
 {
+    result: 'success'
     profileUrl: String
-    메인애티비티에 들어갈 것들
-    추후작성
-    
+    reqComment: Array (아이템은 아래 참고)
+    {
+        tourName: String
+        tourImage: String (Link)
+    }
+    recommendSpot: Array (아이템은 아래 참고)
+    {
+        reqTime: Number (분 단위)
+        theme: String (자연,힐링,평화)
+    }
+    reqShare: Array (아이템은 아래 참고)
+    {
+        tourName: String
+    }
 }
 ```
-- 실패시  
+
+### [PUT] api/user/:id/profile-image
+
+- Description: 프로필 이미지 변경
+- Request Body 
 ```
+파일
+```
+- Response Body
+```
+Response Description: 변경 성공 
+StatusCode : 205
 {
-    추후작성
+    result: 'success'
+    profileUrl: String (변경된 사진 URL)
+}
+
+Response Description: 지원하지 않는 파일일 경우
+StatusCode: 405
+{
+    result: 'failure'
+}
+
+Response Description: 유저를 찾을 수 없음
+StatusCode: 404
+{
+    result: 'failure'
+}
+```
+
+### [PUT] api/user/:id/profile-name
+
+- Description: 프로필 네임 변경
+- Request Body 
+```
+name (바꿀 닉네임)
+```
+- Response Body
+```
+Response Description: 변경 성공
+StatusCode : 205
+{
+    result: 'success'
+    profileName: String (변경된 이름)
+}
+
+Response Description: 닉네임 중복
+StatusCode: 405
+{
+    result: 'failure'
+}
+
+Response Description: 유저를 찾을 수 없음
+StatusCode: 404
+{
+    result: 'failure'
+}
+```
+
+### [POST] api/user/:id/tour-spot
+
+- Description: 유저가 갔다온 장소 저장
+- Request Body 
+```
+tourId (다녀온 관광지 ID)
+```
+- Response Body
+```
+Response Description: 저장 성공
+StatusCode: 201
+{
+    result: 'success'
+}
+
+Response Description: 유저를 찾을 수 없음
+StatusCode: 404
+{
+    result: 'failure'
 }
 ```
 
@@ -56,20 +168,17 @@ StatusCode : 200
 - Description: 웹 메인 페이지의 건의사항
 - Request Body 
 ```
-userId
+userName
+userEmail
+userPhone
+Content
 ```
-- 성공시
+- Response Body
 ```
-StatusCode : 200
+Response Description: 
+StatusCode : 201
 {
-    profileUrl: String
-    
-}
-```
-- 실패시  
-```
-{
-
+    result: 'success'
 }
 ```
 
@@ -88,42 +197,53 @@ theme : String (ex. 자연,힐링,!사랑,먹거리장터,특화거리)
 minTime: Number (분 단위)
 maxTime: Number (분 단위)
 ```
-- 성공시
+- Response Body
 ```
+Response Description: 성공
 StatusCode : 200
 {
-    그 관광지의 위도 경도같이 보내줘야함
+    result:'success'
+    list: Array (아이템은 아래 참고)
+    {
+        reqtime : Number (소요시간, 분단위)
+        rate: Number (평점)
+        theme : String (ex. 자연,힐링,먹거리장터,특화거리)
+        comment: String
+    }
 }
-```
-- 실패시  
-```
+
+Response Description: transport가 지정된 번호가 아닐 경우
+StatusCode : 405
 {
-    나중에
+    result: 'failure'
 }
 ```
 
-### GET api/travel/tour-info
+---------------------------
+
+
+### GET api/travel/:id/tour-info
 
 - Description: 관광지 정보 얻기(API 활용)
-- Request Body 
+- Request Body
 ```
-
+none
 ```
 - 성공시
 ```
 StatusCode : 200
 {
-    추후 작성
+    result: 'success'
 }
 ```
 - 실패시  
 ```
 {
-    나중에
+    result: 'failure'
 }
 ```
 
-### POST api/travel/tour-info/:id
+### POST api/travel/:id/tour-info
 
 - Description: 관광지에 대한 후기 남기기
 - Request Body
@@ -142,93 +262,6 @@ comment: String
 
 
 ~~신고기능은 추후구현~~
-
-### [POST] api/user/tour-spot
-
-- Description: 유저가 갔다온 장소 저장
-- Request Body 
-```
-transport : Number
-    - 도보: 0
-    - 대중교통: 1
-    - 자동차: 2
-lat : Number
-lng : Number
-theme : String (ex. 자연,힐링,!사랑,먹거리장터,특화거리)
-minTime: Number (분 단위)
-maxTime: Number (분 단위)
-```
-- 성공시
-```
-StatusCode : 200
-{
-    그 관광지의 위도 경도같이 보내줘야함
-}
-```
-- 실패시  
-```
-{
-    나중에
-}
-```
-
-### [PUT] api/user/profile-image/:id
-
-- Description: 프로필 이미지 변경
-- Request Body 
-```
-transport : Number
-    - 도보: 0
-    - 대중교통: 1
-    - 자동차: 2
-lat : Number
-lng : Number
-theme : String (ex. 자연,힐링,!사랑,먹거리장터,특화거리)
-minTime: Number (분 단위)
-maxTime: Number (분 단위)
-```
-- 성공시
-```
-StatusCode : 200
-{
-    그 관광지의 위도 경도같이 보내줘야함
-}
-```
-- 실패시  
-```
-{
-    나중에
-}
-```
-
-### [PUT] api/user/profile-name/:id
-
-- Description: 프로필 네임 변경
-- Request Body 
-```
-transport : Number
-    - 도보: 0
-    - 대중교통: 1
-    - 자동차: 2
-lat : Number
-lng : Number
-theme : String (ex. 자연,힐링,!사랑,먹거리장터,특화거리)
-minTime: Number (분 단위)
-maxTime: Number (분 단위)
-```
-- 성공시
-```
-StatusCode : 200
-{
-    그 관광지의 위도 경도같이 보내줘야함
-}
-```
-- 실패시  
-```
-{
-    나중에
-}
-```
 
 ### [GET] api/travel/direction
 
