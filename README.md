@@ -1,23 +1,25 @@
 # 문화데이터 활용 경진대회를 위한 서버
+
 ## 개요
-- 각 서버별 역할을 분담하여 Node.js, Flask로 분업화
-- 데이터베이스로는 MongoDB를 사용
-- 두 서버를 호스팅하여 기능별로 구분하거나 Redirect를 이용할 것으로 예상됨
+- 여행을 랜덤으로 추천해주는 어플리케이션, JustGo 서버입니다.
+
+## 기술
+
+- Node.js / Flask
+- MongoDb
+- AWS EC2
 
 ## Flask
 
-### 파일 구성
-    └ Flask
-    
-### 이번 개발을 진행할 때의 다짐
-- 아직 개발 경험이 별로 없어 미숙한 점 양해 부탁드립니다.
-- 틀린 부분이 있더라도 너그럽게 봐 주시면 정말 감사하겠습니다.
-- 몰라서 못하는 게 아닌, 모르더라도 무엇이든 최선을 다해서 하는 자세를 갖추겠습니다.
+### 사용 모듈
+- mongoengine
+- pymongo
 
 ## Node.js
 
-### 파일 구성
-- 추후 작성
+### 사용 모듈
+- Express
+- mongoose
 
 ## URL
 
@@ -37,7 +39,7 @@ StatusCode: 500
 }
 ```
 
-### ~~GET api/docs~~ (Not Sure)
+### ~~[GET] api/docs~~ (Not Sure)
 
 - ~~URL Description: Swagger API Docs~~
 - ~~Request Body~~
@@ -52,7 +54,7 @@ StatusCode: 200
 ```
 
 
-### POST api/user/login
+### [POST] api/user/login
 
 - URL Description: 페이스북 및 카카오 계정으로 로그인하기(웹 메인 페이지 통합)
 - Request Body
@@ -163,7 +165,7 @@ StatusCode: 404
 }
 ```
 
-### POST api/contact
+### [POST] api/contact
 
 - Description: 웹 메인 페이지의 건의사항
 - Request Body 
@@ -171,18 +173,18 @@ StatusCode: 404
 userName
 userEmail
 userPhone
-Content
+content
 ```
 - Response Body
 ```
-Response Description: 
+Response Description: 작성 성공
 StatusCode : 201
 {
     result: 'success'
 }
 ```
 
-### GET api/travel/tour-list
+### [GET] api/travel/tour-list
 
 - Description: 조건에 맞는 관광지들 얻기
 - Request Body 
@@ -235,7 +237,7 @@ StatusCode : 200
 }
 ```
 
-### GET api/travel/:id/tour-info
+### [GET] api/travel/:id/tour-info
 
 - Description: 관광지 정보 얻기(API 활용)
 - Request Body
@@ -286,11 +288,12 @@ StatusCode: 404
 }
 ```
 
-### POST api/travel/:id/tour-info
+### [POST] api/travel/:id/tour-info
 
 - Description: 관광지에 대한 후기 남기기
 - Request Body
 ```
+writerId: String
 rate: Number
 comment: String
 ```
@@ -309,7 +312,7 @@ StatusCode: 404
 }
 ```
 
-### ~~POST api/travel/:id/tour-info/:id~~ (Not Sure)
+### ~~[POST] api/travel/:id/tour-info/:id~~ (Not Sure)
 
 - ~~Description: 후기 신고하기~~
 - ~~Request Body~~
