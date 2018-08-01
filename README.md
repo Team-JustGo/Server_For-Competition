@@ -37,14 +37,14 @@ StatusCode: 500
 }
 ```
 
-### ~~GET api/docs~~ (Deprecated)
+### ~~GET api/docs~~ (Not Sure)
 
-- URL Description: Swagger API Docs
-- Request Body
+- ~~URL Description: Swagger API Docs~~
+- ~~Request Body~~
 ```
 none
 ```
-- Response Body
+- ~~Response Body~~
 ```
 Response Desription: 성공
 StatusCode: 200
@@ -208,7 +208,7 @@ StatusCode : 200
         reqtime : Number (소요시간, 분단위)
         rate: Number (평점)
         theme : String (ex. 자연,힐링,먹거리장터,특화거리)
-        comment: String
+        comment: String 
     }
 }
 
@@ -219,8 +219,21 @@ StatusCode : 405
 }
 ```
 
----------------------------
+### [GET] api/travel/direction
 
+- Description: 경로 얻기 **(Request 및 Response 확정 x)**
+- Request Body 
+```
+
+```
+- Response Body
+```
+Response Description: 길찾기 성공
+StatusCode : 200
+{
+    
+}
+```
 
 ### GET api/travel/:id/tour-info
 
@@ -229,15 +242,45 @@ StatusCode : 405
 ```
 none
 ```
-- 성공시
+- Response Body
 ```
-StatusCode : 200
+Response Description: 정보 획득 성공
+StatusCode: 200
 {
     result: 'success'
+    name: String
+    address: String
+    info: String
+    image: String (Link)
+    theme: String
+    nearSpot: Array (아이템은 아래 참고)
+    {
+        id: String
+        title: String
+        image: String (Link)
+        rate: Number
+        address: String
+        theme: String
+    }
+    nearRestaurant: Array (아이템은 아래 참고)
+    {
+        name: String
+        address: String
+        image: String (Link)
+        rate: Number
+    }
+    comment: Array (아이템은 아래 참고)
+    {
+        profileImage: String (Link)
+        profileName: String
+        rate: Number
+        content: String
+        date: String or Date
+    }
 }
-```
-- 실패시  
-```
+
+Response Description: 존재하지 않는 관광지
+StatusCode: 404
 {
     result: 'failure'
 }
@@ -251,45 +294,31 @@ StatusCode : 200
 rate: Number
 comment: String
 ```
-- 성공시
+- Response Body
 ```
-나중에 할래요
-```
-- 실패시
-```
-나중에 할래요
-```
-
-
-~~신고기능은 추후구현~~
-
-### [GET] api/travel/direction
-
-- Description: 경로 얻기
-- Request Body 
-```
-transport : Number
-    - 도보: 0
-    - 대중교통: 1
-    - 자동차: 2
-lat : Number
-lng : Number
-theme : String (ex. 자연,힐링,!사랑,먹거리장터,특화거리)
-minTime: Number (분 단위)
-maxTime: Number (분 단위)
-```
-- 성공시
-```
-StatusCode : 200
+Response Description: 작성 성공
+StatusCode: 201
 {
-    그 관광지의 위도 경도같이 보내줘야함
+    result: 'success'
+}
+
+Response Description: 존재하지 않는 관광지
+StatusCode: 404
+{
+    result: 'failure'
 }
 ```
-- 실패시  
+
+### ~~POST api/travel/:id/tour-info/:id~~ (Not Sure)
+
+- ~~Description: 후기 신고하기~~
+- ~~Request Body~~
 ```
-{
-    나중에
-}
+none
+```
+- ~~Response Body~~
+```
+none
 ```
 
 ## DB
@@ -307,6 +336,7 @@ user
 }
 contact
 {
+    date: 문의한 날짜
     name: 이름
     email: 이메일
     phone: 전화번호
