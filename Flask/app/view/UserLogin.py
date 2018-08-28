@@ -6,6 +6,12 @@ from app.model import user
 app = Flask(__name__)
 api = Api(app)
 
+"""
+[구현해야 할 내용들]
+처음 로그인시 고유값 얻어서 DB에 저장하기, 이미 로그인 한 유저일 시 유저 구별하기, 메인페이지 유저 정보 주기
+ 
+"""
+
 
 class GetData:
 
