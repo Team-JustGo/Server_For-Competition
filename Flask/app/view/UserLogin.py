@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_restful import Api
 
-from app.model import User
+from app.model import user
 
 app = Flask(__name__)
 api = Api(app)
