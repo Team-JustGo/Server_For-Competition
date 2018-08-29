@@ -1,746 +1,604 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "JustGo Server Docs!",
-        "version": "1.0.0",
-        "title": "JustGo",
-        "contact": {
-            "url": "https://github.com/Team-JustGo/Server_For-Competition/issues"
-        }
+      "description": "JustGo 서버",
+      "version": "0.0.1",
+      "title": "JustGo Server",
+      "contact": {
+        "url": "https://github.com/Team-JustGo/Server_For-Competition/issues"
+      }
     },
     "host": "ec2-52-79-240-33.ap-northeast-2.compute.amazonaws.com",
     "basePath": "/api",
-    "tags": [{
+    "tags": [
+      {
         "name": "user",
         "description": "유저 관련"
-    }, {
+      },
+      {
         "name": "contact",
-        "description": "문의하세요"
-    }, {
+        "description": "문의 관련"
+      },
+      {
         "name": "travel",
-        "description": "여행갑시다"
-    }],
-    "schemes": ["http"],
+        "description": "여행 관련"
+      }
+    ],
+    "schemes": [
+      "http",
+      "https"
+    ],
     "paths": {
-        "/user/login": {
-            "post": {
-                "tags": ["user"],
-                "summary": "로그인",
-                "description": "로그인 후 메인 페이지 정보 얻기",
-                "produces": "application/json",
-                "parameters": [{
-                    "name": "userId",
-                    "in": "query",
-                    "description": "구분 가능한 고유 ID",
-                    "required": true,
-                    "type": "string"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "로그인 성공",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "headers": {
-                            "X-Rate-Limit": {
-                                "type": "integer",
-                                "format": "int32",
-                                "description": "calls per hour allowed by the user"
-                            },
-                            "X-Expires-After": {
-                                "type": "string",
-                                "format": "date-time",
-                                "description": "date in UTC when token expires"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid username/password supplied"
-                    }
-                }
+      "/user/login": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "로그인",
+          "description": "페이스북 및 카카오 계정으로 로그인하기(웹 메인 페이지 통합)",
+          "operationId": "userLogin",
+          "consumes": [
+            "application/json",
+            "application/x-www-form-urlencoded"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "formData",
+              "name": "userId",
+              "type": "string",
+              "description": "해당 유저의 id",
+              "required": true
             }
-        },
-        "/pet/findByStatus": {
-            "get": {
-                "tags": ["pet"],
-                "summary": "Finds Pets by status",
-                "description": "Multiple status values can be provided with comma separated strings",
-                "operationId": "findPetsByStatus",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "name": "status",
-                    "in": "query",
-                    "description": "Status values that need to be considered for filter",
-                    "required": true,
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "enum": ["available", "pending", "sold"],
-                        "default": "available"
-                    },
-                    "collectionFormat": "multi"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Pet"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid status value"
-                    }
-                },
-                "security": [{
-                    "petstore_auth": ["write:pets", "read:pets"]
-                }]
-            }
-        },
-        "/pet/findByTags": {
-            "get": {
-                "tags": ["pet"],
-                "summary": "Finds Pets by tags",
-                "description": "Muliple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.",
-                "operationId": "findPetsByTags",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "name": "tags",
-                    "in": "query",
-                    "description": "Tags to filter by",
-                    "required": true,
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "collectionFormat": "multi"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/Pet"
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid tag value"
-                    }
-                },
-                "security": [{
-                    "petstore_auth": ["write:pets", "read:pets"]
-                }],
-                "deprecated": true
-            }
-        },
-        "/pet/{petId}": {
-            "get": {
-                "tags": ["pet"],
-                "summary": "Find pet by ID",
-                "description": "Returns a single pet",
-                "operationId": "getPetById",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "name": "petId",
-                    "in": "path",
-                    "description": "ID of pet to return",
-                    "required": true,
-                    "type": "integer",
-                    "format": "int64"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/Pet"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Pet not found"
-                    }
-                },
-                "security": [{
-                    "api_key": []
-                }]
+          ],
+          "responses": {
+            "100": {
+              "description": "회원가입 정보가 필요함",
+              "schema": {
+                "$ref": "#/definitions/Result"
+              }
             },
-            "post": {
-                "tags": ["pet"],
-                "summary": "Updates a pet in the store with form data",
-                "description": "",
-                "operationId": "updatePetWithForm",
-                "consumes": ["application/x-www-form-urlencoded"],
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "name": "petId",
-                    "in": "path",
-                    "description": "ID of pet that needs to be updated",
-                    "required": true,
-                    "type": "integer",
-                    "format": "int64"
-                }, {
-                    "name": "name",
-                    "in": "formData",
-                    "description": "Updated name of the pet",
-                    "required": false,
-                    "type": "string"
-                }, {
-                    "name": "status",
-                    "in": "formData",
-                    "description": "Updated status of the pet",
-                    "required": false,
-                    "type": "string"
-                }],
-                "responses": {
-                    "405": {
-                        "description": "Invalid input"
-                    }
-                },
-                "security": [{
-                    "petstore_auth": ["write:pets", "read:pets"]
-                }]
-            },
-            "delete": {
-                "tags": ["pet"],
-                "summary": "Deletes a pet",
-                "description": "",
-                "operationId": "deletePet",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "name": "api_key",
-                    "in": "header",
-                    "required": false,
-                    "type": "string"
-                }, {
-                    "name": "petId",
-                    "in": "path",
-                    "description": "Pet id to delete",
-                    "required": true,
-                    "type": "integer",
-                    "format": "int64"
-                }],
-                "responses": {
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Pet not found"
-                    }
-                },
-                "security": [{
-                    "petstore_auth": ["write:pets", "read:pets"]
-                }]
+            "200": {
+              "description": "로그인 성공 및 메인에 필요한 정보 제공",
+              "schema": {
+                "$ref": "#/definitions/Main"
+              }
             }
-        },
-        "/pet/{petId}/uploadImage": {
-            "post": {
-                "tags": ["pet"],
-                "summary": "uploads an image",
-                "description": "",
-                "operationId": "uploadFile",
-                "consumes": ["multipart/form-data"],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "name": "petId",
-                    "in": "path",
-                    "description": "ID of pet to update",
-                    "required": true,
-                    "type": "integer",
-                    "format": "int64"
-                }, {
-                    "name": "additionalMetadata",
-                    "in": "formData",
-                    "description": "Additional data to pass to server",
-                    "required": false,
-                    "type": "string"
-                }, {
-                    "name": "file",
-                    "in": "formData",
-                    "description": "file to upload",
-                    "required": false,
-                    "type": "file"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/ApiResponse"
-                        }
-                    }
-                },
-                "security": [{
-                    "petstore_auth": ["write:pets", "read:pets"]
-                }]
-            }
-        },
-        "/store/inventory": {
-            "get": {
-                "tags": ["store"],
-                "summary": "Returns pet inventories by status",
-                "description": "Returns a map of status codes to quantities",
-                "operationId": "getInventory",
-                "produces": ["application/json"],
-                "parameters": [],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "integer",
-                                "format": "int32"
-                            }
-                        }
-                    }
-                },
-                "security": [{
-                    "api_key": []
-                }]
-            }
-        },
-        "/store/order": {
-            "post": {
-                "tags": ["store"],
-                "summary": "Place an order for a pet",
-                "description": "",
-                "operationId": "placeOrder",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "order placed for purchasing the pet",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/Order"
-                    }
-                }],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/Order"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid Order"
-                    }
-                }
-            }
-        },
-        "/store/order/{orderId}": {
-            "get": {
-                "tags": ["store"],
-                "summary": "Find purchase order by ID",
-                "description": "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions",
-                "operationId": "getOrderById",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "name": "orderId",
-                    "in": "path",
-                    "description": "ID of pet that needs to be fetched",
-                    "required": true,
-                    "type": "integer",
-                    "maximum": 10.0,
-                    "minimum": 1.0,
-                    "format": "int64"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/Order"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Order not found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": ["store"],
-                "summary": "Delete purchase order by ID",
-                "description": "For valid response try integer IDs with positive integer value. Negative or non-integer values will generate API errors",
-                "operationId": "deleteOrder",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "name": "orderId",
-                    "in": "path",
-                    "description": "ID of the order that needs to be deleted",
-                    "required": true,
-                    "type": "integer",
-                    "minimum": 1.0,
-                    "format": "int64"
-                }],
-                "responses": {
-                    "400": {
-                        "description": "Invalid ID supplied"
-                    },
-                    "404": {
-                        "description": "Order not found"
-                    }
-                }
-            }
-        },
-        "/user": {
-            "post": {
-                "tags": ["user"],
-                "summary": "Create user",
-                "description": "This can only be done by the logged in user.",
-                "operationId": "createUser",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "Created user object",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/User"
-                    }
-                }],
-                "responses": {
-                    "default": {
-                        "description": "successful operation"
-                    }
-                }
-            }
-        },
-        "/user/createWithArray": {
-            "post": {
-                "tags": ["user"],
-                "summary": "Creates list of users with given input array",
-                "description": "",
-                "operationId": "createUsersWithArrayInput",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "List of user object",
-                    "required": true,
-                    "schema": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                }],
-                "responses": {
-                    "default": {
-                        "description": "successful operation"
-                    }
-                }
-            }
-        },
-        "/user/createWithList": {
-            "post": {
-                "tags": ["user"],
-                "summary": "Creates list of users with given input array",
-                "description": "",
-                "operationId": "createUsersWithListInput",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "in": "body",
-                    "name": "body",
-                    "description": "List of user object",
-                    "required": true,
-                    "schema": {
-                        "type": "array",
-                        "items": {
-                            "$ref": "#/definitions/User"
-                        }
-                    }
-                }],
-                "responses": {
-                    "default": {
-                        "description": "successful operation"
-                    }
-                }
-            }
-        },
-        "/user/logout": {
-            "get": {
-                "tags": ["user"],
-                "summary": "Logs out current logged in user session",
-                "description": "",
-                "operationId": "logoutUser",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [],
-                "responses": {
-                    "default": {
-                        "description": "successful operation"
-                    }
-                }
-            }
-        },
-        "/user/{username}": {
-            "get": {
-                "tags": ["user"],
-                "summary": "Get user by user name",
-                "description": "",
-                "operationId": "getUserByName",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "name": "username",
-                    "in": "path",
-                    "description": "The name that needs to be fetched. Use user1 for testing. ",
-                    "required": true,
-                    "type": "string"
-                }],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/User"
-                        }
-                    },
-                    "400": {
-                        "description": "Invalid username supplied"
-                    },
-                    "404": {
-                        "description": "User not found"
-                    }
-                }
-            },
-            "put": {
-                "tags": ["user"],
-                "summary": "Updated user",
-                "description": "This can only be done by the logged in user.",
-                "operationId": "updateUser",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "name": "username",
-                    "in": "path",
-                    "description": "name that need to be updated",
-                    "required": true,
-                    "type": "string"
-                }, {
-                    "in": "body",
-                    "name": "body",
-                    "description": "Updated user object",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/User"
-                    }
-                }],
-                "responses": {
-                    "400": {
-                        "description": "Invalid user supplied"
-                    },
-                    "404": {
-                        "description": "User not found"
-                    }
-                }
-            },
-            "delete": {
-                "tags": ["user"],
-                "summary": "Delete user",
-                "description": "This can only be done by the logged in user.",
-                "operationId": "deleteUser",
-                "produces": ["application/xml", "application/json"],
-                "parameters": [{
-                    "name": "username",
-                    "in": "path",
-                    "description": "The name that needs to be deleted",
-                    "required": true,
-                    "type": "string"
-                }],
-                "responses": {
-                    "400": {
-                        "description": "Invalid username supplied"
-                    },
-                    "404": {
-                        "description": "User not found"
-                    }
-                }
-            }
+          }
         }
-    },
-    "securityDefinitions": {
-        "petstore_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "http://petstore.swagger.io/oauth/dialog",
-            "flow": "implicit",
-            "scopes": {
-                "write:pets": "modify pets in your account",
-                "read:pets": "read your pets"
+      },
+      "/user/profile-image": {
+        "put": {
+          "tags": [
+            "user"
+          ],
+          "summary": "프로필 이미지 변경",
+          "description": "id에 해당하는 유저의 프로필 이미지 변경",
+          "operationId": "changeProfileImage",
+          "consumes": [
+            "multipart/form-data"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "X-Access-Token",
+              "in": "header",
+              "type": "string",
+              "required": true,
+              "description": "JWT"
+            },
+            {
+              "name": "profile-image",
+              "in": "formData",
+              "type": "file",
+              "description": "변경할 사진 파일"
             }
-        },
-        "api_key": {
-            "type": "apiKey",
-            "name": "api_key",
-            "in": "header"
+          ],
+          "responses": {
+            "205": {
+              "description": "변경 성공",
+              "schema": {
+                "$ref": "#/definitions/Result"
+              }
+            },
+            "404": {
+              "description": "유저를 찾을 수 없음",
+              "schema": {
+                "$ref": "#/definitions/Result"
+              }
+            }
+          }
         }
+      },
+      "/user/profile-name": {
+        "put": {
+          "tags": [
+            "user"
+          ],
+          "summary": "프로필 네임 변경",
+          "description": "id에 해당하는 유저의 프로필 네임 변경",
+          "operationId": "changeProfileName",
+          "consumes": [
+            "application/json",
+            "application/x-www-form-urlencoded"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "X-Access-Token",
+              "in": "header",
+              "type": "string",
+              "required": true,
+              "description": "JWT"
+            },
+            {
+              "name": "name",
+              "in": "formData",
+              "type": "string",
+              "required": true,
+              "description": "바꿀 닉네임"
+            }
+          ],
+          "responses": {
+            "205": {
+              "description": "변경 성공",
+              "schema": {
+                "$ref": "#/definitions/Result"
+              }
+            },
+            "404": {
+              "description": "유저를 찾을 수 없음",
+              "schema": {
+                "$ref": "#/definitions/Result"
+              }
+            }
+          }
+        }
+      },
+      "/user/tour-spot": {
+        "post": {
+          "tags": [
+            "user"
+          ],
+          "summary": "장소 저장",
+          "description": "유저가 다녀온 장소를 저장",
+          "operationId": "saveWentSpot",
+          "consumes": [
+            "application/json",
+            "application/x-www-form-urlencoded"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "X-Access-Token",
+              "in": "header",
+              "type": "string",
+              "required": true,
+              "description": "JWT"
+            },
+            {
+              "name": "tourId",
+              "in": "formData",
+              "type": "string",
+              "required": true,
+              "description": "다녀온 관광지 Id"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "저장 성공",
+              "schema": {
+                "$ref": "#/definitions/Result"
+              }
+            },
+            "404": {
+              "description": "유저를 찾을 수 없음",
+              "schema": {
+                "$ref": "#/definitions/Result"
+              }
+            }
+          }
+        }
+      },
+      "/contact": {
+        "post": {
+          "tags": [
+            "contact"
+          ],
+          "summary": "문의",
+          "description": "웹 홈페이지에서 문의",
+          "operationId": "contact",
+          "consumes": [
+            "application/json",
+            "application/x-www-form-urlencoded"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "userName",
+              "in": "formData",
+              "type": "string",
+              "required": true,
+              "description": "유저 이름"
+            },
+            {
+              "name": "userEmail",
+              "in": "formData",
+              "type": "string",
+              "required": true,
+              "description": "유저 이메일"
+            },
+            {
+              "name": "userPhone",
+              "in": "formData",
+              "type": "string",
+              "required": true,
+              "description": "유저 전화번호"
+            },
+            {
+              "name": "content",
+              "in": "formData",
+              "type": "string",
+              "required": true,
+              "description": "문의 내용"
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "작성 성공",
+              "schema": {
+                "$ref": "#/definitions/Result"
+              }
+            }
+          }
+        }
+      },
+      "/travel/tour-list": {
+        "get": {
+          "tags": [
+            "travel"
+          ],
+          "summary": "여행지 리스트",
+          "description": "조건에 맞는 여행지 리스트 Parameter에서 transport는 도보:0/대중교통:1/자동차:2",
+          "consumes": [
+            "application/json",
+            "application/x-www-form-urlencoded"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "transport",
+              "in": "query",
+              "type": "string",
+              "required": true,
+              "description": "교통수단"
+            },
+            {
+              "name": "lat",
+              "in": "query",
+              "type": "number",
+              "required": true,
+              "description": "위도"
+            },
+            {
+              "name": "lng",
+              "in": "query",
+              "type": "number",
+              "required": true,
+              "description": "경도"
+            },
+            {
+              "name": "theme",
+              "in": "query",
+              "type": "string",
+              "required": true,
+              "description": "여행지 주제(ex. 자연,힐링,!사랑,먹거리장터,특화거리)"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "요청 성공",
+              "schema": {
+                "$ref": "#/definitions/TourList"
+              }
+            },
+            "405": {
+              "description": "transport가 지정된 번호가 아닐 경우",
+              "schema": {
+                "$ref": "#/definitions/Result"
+              }
+            }
+          }
+        }
+      },
+      "/travel/direction": {
+        "get": {
+          "tags": [
+            "travel"
+          ],
+          "summary": "경로 얻기",
+          "description": "여행지까지의 경로 얻기",
+          "parameters": [
+            {
+              "name": "test",
+              "in": "query",
+              "type": "string",
+              "required": true,
+              "description": "테스트"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "요청 성공",
+              "schema": {
+                "$ref": "#/definitions/TourDirection"
+              }
+            }
+          }
+        }
+      },
+      "/travel/{id}/tour-info": {
+        "get": {
+          "tags": [
+            "travel"
+          ],
+          "summary": "관광지 정보 얻기",
+          "description": "해당 id의 관광지 정보 얻기",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "type": "string",
+              "required": true,
+              "description": "관광지 아이디"
+            }
+          ]
+        }
+      }
     },
     "definitions": {
-        "Order": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "petId": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "quantity": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "shipDate": {
-                    "type": "string",
-                    "format": "date-time"
-                },
-                "status": {
-                    "type": "string",
-                    "description": "Order Status",
-                    "enum": ["placed", "approved", "delivered"]
-                },
-                "complete": {
-                    "type": "boolean",
-                    "default": false
-                }
-            },
-            "xml": {
-                "name": "Order"
-            }
-        },
-        "User": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "username": {
-                    "type": "string"
-                },
-                "firstName": {
-                    "type": "string"
-                },
-                "lastName": {
-                    "type": "string"
-                },
-                "email": {
-                    "type": "string"
-                },
-                "password": {
-                    "type": "string"
-                },
-                "phone": {
-                    "type": "string"
-                },
-                "userStatus": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "User Status"
-                }
-            },
-            "xml": {
-                "name": "User"
-            }
-        },
-        "Category": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "name": {
-                    "type": "string"
-                }
-            },
-            "xml": {
-                "name": "Category"
-            }
-        },
-        "Tag": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "name": {
-                    "type": "string"
-                }
-            },
-            "xml": {
-                "name": "Tag"
-            }
-        },
-        "Pet": {
-            "type": "object",
-            "required": ["name", "photoUrls"],
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "format": "int64"
-                },
-                "category": {
-                    "$ref": "#/definitions/Category"
-                },
-                "name": {
-                    "type": "string",
-                    "example": "doggie"
-                },
-                "photoUrls": {
-                    "type": "array",
-                    "xml": {
-                        "name": "photoUrl",
-                        "wrapped": true
-                    },
-                    "items": {
-                        "type": "string"
-                    }
-                },
-                "tags": {
-                    "type": "array",
-                    "xml": {
-                        "name": "tag",
-                        "wrapped": true
-                    },
-                    "items": {
-                        "$ref": "#/definitions/Tag"
-                    }
-                },
-                "status": {
-                    "type": "string",
-                    "description": "pet status in the store",
-                    "enum": ["available", "pending", "sold"]
-                }
-            },
-            "xml": {
-                "name": "Pet"
-            }
-        },
-        "ApiResponse": {
-            "type": "object",
-            "properties": {
-                "code": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "type": {
-                    "type": "string"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
+      "Result": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string"
+          }
         }
-    },
-    "externalDocs": {
-        "description": "Find out more about Swagger",
-        "url": "http://swagger.io"
+      },
+      "Main": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string"
+          },
+          "profileUrl": {
+            "type": "string"
+          },
+          "reqComment": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tourName": {
+                  "type": "string"
+                },
+                "tourImage": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "recommendSpot": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "reqTime": {
+                  "type": "integer"
+                },
+                "theme": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "reqShare": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tourName": {
+                  "type": "string"
+                },
+                "tourImage": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TourList": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string"
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "reqtime": {
+                  "type": "number"
+                },
+                "rate": {
+                  "type": "number"
+                },
+                "theme": {
+                  "type": "string"
+                },
+                "comment": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "TourDirection": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string"
+          }
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "petId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shipDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "description": "Order Status",
+            "enum": [
+              "placed",
+              "approved",
+              "delivered"
+            ]
+          },
+          "complete": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "xml": {
+          "name": "Order"
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Category"
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Tag"
+        }
+      },
+      "Pet": {
+        "type": "object",
+        "required": [
+          "name",
+          "photoUrls"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "category": {
+            "$ref": "#/definitions/Category"
+          },
+          "name": {
+            "type": "string",
+            "example": "doggie"
+          },
+          "photoUrls": {
+            "type": "array",
+            "xml": {
+              "name": "photoUrl",
+              "wrapped": true
+            },
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "xml": {
+              "name": "tag",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/definitions/Tag"
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "pet status in the store",
+            "enum": [
+              "available",
+              "pending",
+              "sold"
+            ]
+          }
+        },
+        "xml": {
+          "name": "Pet"
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
     }
-}
+  }
