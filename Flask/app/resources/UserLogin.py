@@ -13,24 +13,6 @@ api = Api(app)
 """
 
 
-class GetData:
-
-    def get_users_url(self):
-        pass
-
-    def get_tour_name(self):
-        pass
-
-    def get_tour_image(self):
-        pass
-
-    def get_req_time(self):
-        pass
-
-    def get_theme(self):
-        pass
-
-
 class UserLogin:
 
     def post(self):
