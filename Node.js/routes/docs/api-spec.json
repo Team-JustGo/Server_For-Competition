@@ -1,604 +1,608 @@
 {
-    "swagger": "2.0",
-    "info": {
-      "description": "JustGo 서버",
-      "version": "0.0.1",
-      "title": "JustGo Server",
-      "contact": {
-        "url": "https://github.com/Team-JustGo/Server_For-Competition/issues"
-      }
+  "swagger": "2.0",
+  "info": {
+    "description": "JustGo 서버",
+    "version": "0.0.1",
+    "title": "JustGo Server",
+    "contact": {
+      "url": "https://github.com/Team-JustGo/Server_For-Competition/issues"
+    }
+  },
+  "host": "ec2-52-79-240-33.ap-northeast-2.compute.amazonaws.com",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "user",
+      "description": "유저 관련"
     },
-    "host": "ec2-52-79-240-33.ap-northeast-2.compute.amazonaws.com",
-    "basePath": "/api",
-    "tags": [
-      {
-        "name": "user",
-        "description": "유저 관련"
-      },
-      {
-        "name": "contact",
-        "description": "문의 관련"
-      },
-      {
-        "name": "travel",
-        "description": "여행 관련"
-      }
-    ],
-    "schemes": [
-      "http",
-      "https"
-    ],
-    "paths": {
-      "/user/login": {
-        "post": {
-          "tags": [
-            "user"
-          ],
-          "summary": "로그인",
-          "description": "페이스북 및 카카오 계정으로 로그인하기(웹 메인 페이지 통합)",
-          "operationId": "userLogin",
-          "consumes": [
-            "application/json",
-            "application/x-www-form-urlencoded"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "formData",
-              "name": "userId",
-              "type": "string",
-              "description": "해당 유저의 id",
-              "required": true
-            }
-          ],
-          "responses": {
-            "100": {
-              "description": "회원가입 정보가 필요함",
-              "schema": {
-                "$ref": "#/definitions/Result"
-              }
-            },
-            "200": {
-              "description": "로그인 성공 및 메인에 필요한 정보 제공",
-              "schema": {
-                "$ref": "#/definitions/Main"
-              }
-            }
-          }
-        }
-      },
-      "/user/profile-image": {
-        "put": {
-          "tags": [
-            "user"
-          ],
-          "summary": "프로필 이미지 변경",
-          "description": "id에 해당하는 유저의 프로필 이미지 변경",
-          "operationId": "changeProfileImage",
-          "consumes": [
-            "multipart/form-data"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "X-Access-Token",
-              "in": "header",
-              "type": "string",
-              "required": true,
-              "description": "JWT"
-            },
-            {
-              "name": "profile-image",
-              "in": "formData",
-              "type": "file",
-              "description": "변경할 사진 파일"
-            }
-          ],
-          "responses": {
-            "205": {
-              "description": "변경 성공",
-              "schema": {
-                "$ref": "#/definitions/Result"
-              }
-            },
-            "404": {
-              "description": "유저를 찾을 수 없음",
-              "schema": {
-                "$ref": "#/definitions/Result"
-              }
-            }
-          }
-        }
-      },
-      "/user/profile-name": {
-        "put": {
-          "tags": [
-            "user"
-          ],
-          "summary": "프로필 네임 변경",
-          "description": "id에 해당하는 유저의 프로필 네임 변경",
-          "operationId": "changeProfileName",
-          "consumes": [
-            "application/json",
-            "application/x-www-form-urlencoded"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "X-Access-Token",
-              "in": "header",
-              "type": "string",
-              "required": true,
-              "description": "JWT"
-            },
-            {
-              "name": "name",
-              "in": "formData",
-              "type": "string",
-              "required": true,
-              "description": "바꿀 닉네임"
-            }
-          ],
-          "responses": {
-            "205": {
-              "description": "변경 성공",
-              "schema": {
-                "$ref": "#/definitions/Result"
-              }
-            },
-            "404": {
-              "description": "유저를 찾을 수 없음",
-              "schema": {
-                "$ref": "#/definitions/Result"
-              }
-            }
-          }
-        }
-      },
-      "/user/tour-spot": {
-        "post": {
-          "tags": [
-            "user"
-          ],
-          "summary": "장소 저장",
-          "description": "유저가 다녀온 장소를 저장",
-          "operationId": "saveWentSpot",
-          "consumes": [
-            "application/json",
-            "application/x-www-form-urlencoded"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "X-Access-Token",
-              "in": "header",
-              "type": "string",
-              "required": true,
-              "description": "JWT"
-            },
-            {
-              "name": "tourId",
-              "in": "formData",
-              "type": "string",
-              "required": true,
-              "description": "다녀온 관광지 Id"
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "저장 성공",
-              "schema": {
-                "$ref": "#/definitions/Result"
-              }
-            },
-            "404": {
-              "description": "유저를 찾을 수 없음",
-              "schema": {
-                "$ref": "#/definitions/Result"
-              }
-            }
-          }
-        }
-      },
-      "/contact": {
-        "post": {
-          "tags": [
-            "contact"
-          ],
-          "summary": "문의",
-          "description": "웹 홈페이지에서 문의",
-          "operationId": "contact",
-          "consumes": [
-            "application/json",
-            "application/x-www-form-urlencoded"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "userName",
-              "in": "formData",
-              "type": "string",
-              "required": true,
-              "description": "유저 이름"
-            },
-            {
-              "name": "userEmail",
-              "in": "formData",
-              "type": "string",
-              "required": true,
-              "description": "유저 이메일"
-            },
-            {
-              "name": "userPhone",
-              "in": "formData",
-              "type": "string",
-              "required": true,
-              "description": "유저 전화번호"
-            },
-            {
-              "name": "content",
-              "in": "formData",
-              "type": "string",
-              "required": true,
-              "description": "문의 내용"
-            }
-          ],
-          "responses": {
-            "201": {
-              "description": "작성 성공",
-              "schema": {
-                "$ref": "#/definitions/Result"
-              }
-            }
-          }
-        }
-      },
-      "/travel/tour-list": {
-        "get": {
-          "tags": [
-            "travel"
-          ],
-          "summary": "여행지 리스트",
-          "description": "조건에 맞는 여행지 리스트 Parameter에서 transport는 도보:0/대중교통:1/자동차:2",
-          "consumes": [
-            "application/json",
-            "application/x-www-form-urlencoded"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "name": "transport",
-              "in": "query",
-              "type": "string",
-              "required": true,
-              "description": "교통수단"
-            },
-            {
-              "name": "lat",
-              "in": "query",
-              "type": "number",
-              "required": true,
-              "description": "위도"
-            },
-            {
-              "name": "lng",
-              "in": "query",
-              "type": "number",
-              "required": true,
-              "description": "경도"
-            },
-            {
-              "name": "theme",
-              "in": "query",
-              "type": "string",
-              "required": true,
-              "description": "여행지 주제(ex. 자연,힐링,!사랑,먹거리장터,특화거리)"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "요청 성공",
-              "schema": {
-                "$ref": "#/definitions/TourList"
-              }
-            },
-            "405": {
-              "description": "transport가 지정된 번호가 아닐 경우",
-              "schema": {
-                "$ref": "#/definitions/Result"
-              }
-            }
-          }
-        }
-      },
-      "/travel/direction": {
-        "get": {
-          "tags": [
-            "travel"
-          ],
-          "summary": "경로 얻기",
-          "description": "여행지까지의 경로 얻기",
-          "parameters": [
-            {
-              "name": "test",
-              "in": "query",
-              "type": "string",
-              "required": true,
-              "description": "테스트"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "요청 성공",
-              "schema": {
-                "$ref": "#/definitions/TourDirection"
-              }
-            }
-          }
-        }
-      },
-      "/travel/{id}/tour-info": {
-        "get": {
-          "tags": [
-            "travel"
-          ],
-          "summary": "관광지 정보 얻기",
-          "description": "해당 id의 관광지 정보 얻기",
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "type": "string",
-              "required": true,
-              "description": "관광지 아이디"
-            }
-          ]
-        }
-      }
+    {
+      "name": "contact",
+      "description": "문의 관련"
     },
-    "definitions": {
-      "Result": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "string"
-          }
-        }
-      },
-      "Main": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "string"
-          },
-          "profileUrl": {
-            "type": "string"
-          },
-          "reqComment": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "tourName": {
-                  "type": "string"
-                },
-                "tourImage": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "recommendSpot": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "reqTime": {
-                  "type": "integer"
-                },
-                "theme": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "reqShare": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "tourName": {
-                  "type": "string"
-                },
-                "tourImage": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "TourList": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "string"
-          },
-          "list": {
-            "type": "array",
-            "items": {
-              "type": "object",
-              "properties": {
-                "reqtime": {
-                  "type": "number"
-                },
-                "rate": {
-                  "type": "number"
-                },
-                "theme": {
-                  "type": "string"
-                },
-                "comment": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "TourDirection": {
-        "type": "object",
-        "properties": {
-          "result": {
-            "type": "string"
-          }
-        }
-      },
-      "Order": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "petId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "quantity": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "shipDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "status": {
-            "type": "string",
-            "description": "Order Status",
-            "enum": [
-              "placed",
-              "approved",
-              "delivered"
-            ]
-          },
-          "complete": {
-            "type": "boolean",
-            "default": false
-          }
-        },
-        "xml": {
-          "name": "Order"
-        }
-      },
-      "Category": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "xml": {
-          "name": "Category"
-        }
-      },
-      "Tag": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "xml": {
-          "name": "Tag"
-        }
-      },
-      "Pet": {
-        "type": "object",
-        "required": [
-          "name",
-          "photoUrls"
+    {
+      "name": "travel",
+      "description": "여행 관련"
+    }
+  ],
+  "schemes": [
+    "http",
+    "https"
+  ],
+  "paths": {
+    "/user/login": {
+      "post": {
+        "tags": [
+          "user"
         ],
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "category": {
-            "$ref": "#/definitions/Category"
-          },
-          "name": {
+        "summary": "로그인",
+        "description": "페이스북 및 카카오 계정으로 로그인하기(웹 메인 페이지 통합)",
+        "operationId": "userLogin",
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "userId",
             "type": "string",
-            "example": "doggie"
-          },
-          "photoUrls": {
-            "type": "array",
-            "xml": {
-              "name": "photoUrl",
-              "wrapped": true
-            },
-            "items": {
-              "type": "string"
+            "description": "해당 유저의 id",
+            "required": true
+          }
+        ],
+        "responses": {
+          "100": {
+            "description": "회원가입 정보가 필요함",
+            "schema": {
+              "$ref": "#/definitions/Result"
             }
           },
-          "tags": {
-            "type": "array",
-            "xml": {
-              "name": "tag",
-              "wrapped": true
-            },
-            "items": {
-              "$ref": "#/definitions/Tag"
+          "200": {
+            "description": "로그인 성공 및 메인에 필요한 정보 제공",
+            "schema": {
+              "$ref": "#/definitions/Main"
+            }
+          }
+        }
+      }
+    },
+    "/user/profile-image": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "프로필 이미지 변경",
+        "description": "id에 해당하는 유저의 프로필 이미지 변경",
+        "operationId": "changeProfileImage",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-Access-Token",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "JWT"
+          },
+          {
+            "name": "profile-image",
+            "in": "formData",
+            "type": "file",
+            "required": true,
+            "description": "변경할 사진 파일"
+          }
+        ],
+        "responses": {
+          "205": {
+            "description": "변경 성공",
+            "schema": {
+              "$ref": "#/definitions/Result"
             }
           },
-          "status": {
+          "404": {
+            "description": "유저를 찾을 수 없음",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      }
+    },
+    "/user/profile-name": {
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "프로필 네임 변경",
+        "description": "id에 해당하는 유저의 프로필 네임 변경",
+        "operationId": "changeProfileName",
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-Access-Token",
+            "in": "header",
             "type": "string",
-            "description": "pet status in the store",
-            "enum": [
-              "available",
-              "pending",
-              "sold"
-            ]
+            "required": true,
+            "description": "JWT"
+          },
+          {
+            "name": "name",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "바꿀 닉네임"
+          }
+        ],
+        "responses": {
+          "205": {
+            "description": "변경 성공",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "404": {
+            "description": "유저를 찾을 수 없음",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      }
+    },
+    "/user/tour-spot": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "장소 저장",
+        "description": "유저가 다녀온 장소를 저장",
+        "operationId": "saveWentSpot",
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "X-Access-Token",
+            "in": "header",
+            "type": "string",
+            "required": true,
+            "description": "JWT"
+          },
+          {
+            "name": "tourId",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "다녀온 관광지 Id"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "저장 성공",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          },
+          "404": {
+            "description": "유저를 찾을 수 없음",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      }
+    },
+    "/contact": {
+      "post": {
+        "tags": [
+          "contact"
+        ],
+        "summary": "문의",
+        "description": "웹 홈페이지에서 문의",
+        "operationId": "contact",
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userName",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "유저 이름"
+          },
+          {
+            "name": "userEmail",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "유저 이메일"
+          },
+          {
+            "name": "userPhone",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "유저 전화번호"
+          },
+          {
+            "name": "content",
+            "in": "formData",
+            "type": "string",
+            "required": true,
+            "description": "문의 내용"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "작성 성공",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      }
+    },
+    "/travel/tour-list": {
+      "get": {
+        "tags": [
+          "travel"
+        ],
+        "summary": "여행지 리스트",
+        "description": "조건에 맞는 여행지 리스트 Parameter에서 transport는 도보:0/대중교통:1/자동차:2",
+        "consumes": [
+          "application/json",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "transport",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "교통수단"
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "type": "number",
+            "required": true,
+            "description": "위도"
+          },
+          {
+            "name": "lng",
+            "in": "query",
+            "type": "number",
+            "required": true,
+            "description": "경도"
+          },
+          {
+            "name": "theme",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "여행지 주제(ex. 자연,힐링,!사랑,먹거리장터,특화거리)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "요청 성공",
+            "schema": {
+              "$ref": "#/definitions/TourList"
+            }
+          },
+          "405": {
+            "description": "transport가 지정된 번호가 아닐 경우",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      }
+    },
+    "/travel/direction": {
+      "get": {
+        "tags": [
+          "travel"
+        ],
+        "summary": "경로 얻기",
+        "description": "여행지까지의 경로 얻기",
+        "parameters": [
+          {
+            "name": "test",
+            "in": "query",
+            "type": "string",
+            "required": true,
+            "description": "테스트"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "요청 성공",
+            "schema": {
+              "$ref": "#/definitions/TourDirection"
+            }
           }
         },
-        "xml": {
-          "name": "Pet"
+        "deprecated": true
+      }
+    },
+    "/travel/{id}/tour-info": {
+      "get": {
+        "tags": [
+          "travel"
+        ],
+        "summary": "관광지 정보 얻기",
+        "description": "해당 id의 관광지 정보 얻기",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "description": "관광지 아이디"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "요청 성공",
+            "schema": {
+              "$ref": "#/definitions/PlaceInfo"
+            }
+          },
+          "404": {
+            "description": "존재하지 않는 관광지",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
         }
       },
-      "ApiResponse": {
-        "type": "object",
-        "properties": {
-          "code": {
-            "type": "integer",
-            "format": "int32"
+      "post": {
+        "tags": [
+          "travel"
+        ],
+        "summary": "후기 남기기",
+        "description": "id에 해당하는 관광지에 후기 남기기",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "description": "관광지 아이디"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "작성 성공",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
           },
-          "type": {
-            "type": "string"
-          },
-          "message": {
-            "type": "string"
+          "404": {
+            "description": "존재하지 않는 관광지",
+            "schema": {
+              "$ref": "#/definitions/Result"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Result": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string"
+        }
+      }
+    },
+    "Main": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string"
+        },
+        "profileUrl": {
+          "type": "string"
+        },
+        "reqComment": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "tourName": {
+                "type": "string"
+              },
+              "tourImage": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "recommendSpot": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reqTime": {
+                "type": "integer"
+              },
+              "theme": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "reqShare": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "tourName": {
+                "type": "string"
+              },
+              "tourImage": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "TourList": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string"
+        },
+        "list": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reqtime": {
+                "type": "number"
+              },
+              "rate": {
+                "type": "number"
+              },
+              "theme": {
+                "type": "string"
+              },
+              "comment": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "TourDirection": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string"
+        }
+      }
+    },
+    "PlaceInfo": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        },
+        "info": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "theme": {
+          "type": "string"
+        },
+        "nearSpot": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "title": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "rate": {
+                "type": "number"
+              },
+              "address": {
+                "type": "string"
+              },
+              "theme": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "nearRestaurant": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "image": {
+                "type": "string"
+              },
+              "rate": {
+                "type": "number"
+              }
+            }
+          }
+        },
+        "comment": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "profileImage": {
+                "type": "string"
+              },
+              "profileName": {
+                "type": "string"
+              },
+              "rate": {
+                "type": "number"
+              },
+              "content": {
+                "type": "string"
+              },
+              "date": {
+                "type": "string"
+              }
+            }
           }
         }
       }
     }
   }
+}
