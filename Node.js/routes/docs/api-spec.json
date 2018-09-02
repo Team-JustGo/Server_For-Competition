@@ -270,7 +270,7 @@
           "travel"
         ],
         "summary": "여행지 리스트",
-        "description": "조건에 맞는 여행지 리스트 Parameter에서 transport는 도보:0/대중교통:1/자동차:2",
+        "description": "조건에 맞는 여행지 리스트",
         "consumes": [
           "application/json",
           "application/x-www-form-urlencoded"
@@ -282,9 +282,14 @@
           {
             "name": "transport",
             "in": "query",
-            "type": "string",
-            "required": true,
-            "description": "교통수단"
+            "enum": [
+              "0: 자동차",
+              "1: 대중교통",
+              "2: 도보"
+            ],
+            "description": "교통수단",
+            "type": "integer",
+            "required": true
           },
           {
             "name": "lat",
@@ -306,6 +311,20 @@
             "type": "string",
             "required": true,
             "description": "여행지 주제(ex. 자연,힐링,!사랑,먹거리장터,특화거리)"
+          },
+          {
+            "name": "minTime",
+            "in": "query",
+            "type": "number",
+            "required": true,
+            "description": "최소 걸리는 시간, 분 단위"
+          },
+          {
+            "name": "maxTime",
+            "in": "query",
+            "type": "number",
+            "required": true,
+            "description": "최대 걸리는 시간, 분 단위"
           }
         ],
         "responses": {
