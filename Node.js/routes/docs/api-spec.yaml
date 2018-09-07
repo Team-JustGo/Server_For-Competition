@@ -28,6 +28,7 @@ paths:
       consumes:
       - "application/json"
       - "application/x-www-form-urlencoded"
+      - "multipart/form-data"
       produces:
       - "application/json"
       parameters:
@@ -36,6 +37,14 @@ paths:
         type: "string"
         description: "해당 유저의 id"
         required: true
+      - in: "formData"
+        name: "name"
+        type: "string"
+        description: "닉네임"
+      - in: "formData"
+        name: "picture"
+        type: "file"
+        description: "사진"
       responses:
         100:
           description: "회원가입 정보가 필요함"
