@@ -3,12 +3,6 @@ import os
 from flask import Flask, jsonify
 from flask_restful import Api, Resource, reqparse
 
-ID = {"by09115", "yej9569"}
-
-connection_set = {
-    'user': 'by09115',
-    'password': 'hunter5402'
-}
 
 uri = "mongodb://{user}:{password}@ds018508.mlab.com:18508/justgo".format(**connection_set)
 client = MongoClient(uri)
@@ -40,3 +34,27 @@ for i in range(user.count()):
 """
 
 print(list(user[0].values()))
+
+success_response = {
+                    "result": "Success",
+                    "profileUrl": list(user[i].values())[3],
+                    "reqComment": [
+                        {
+                            "tourName": "Undefined",
+                            "tourImage": "Undefined"
+                        }
+                    ],
+                    "recommendSpot": [
+                        {
+                            "reqTime": 500,
+                            "Theme": "Undefined"
+                        }
+                    ],
+                    "reqShare": [
+                        {
+                            "tourName": list(SocialLogin.user[i].values())[4],
+                            "tourImage": "Undefined"
+                        }
+                    ]
+                }
+                return success_response, 200
