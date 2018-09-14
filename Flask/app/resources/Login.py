@@ -1,7 +1,7 @@
 from flask import request, Response, jsonify
 from flask_restful import Resource
 from flask_jwt_extended import create_access_token, JWTManager, jwt_required, get_jwt_identity
-from app.resources import connect
+from resources import connect
 
 
 class SocialLogin(Resource):
@@ -10,6 +10,7 @@ class SocialLogin(Resource):
     def post(self):
         user = connect.user
         payload = request.json
+        print('\n\n'+str(type(payload))+'\n\n')
         _userId = payload['userId']
         _name = payload['name']
         _picture = payload['picture']
