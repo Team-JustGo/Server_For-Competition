@@ -6,37 +6,37 @@ from resources import connect, Login
 
 class UserMain(Resource):
 
+    @jwt_required
     def get(self):
 
         user = connect.user
-        payload = request.json
-        _X_TOKEN = payload['X-Access-Token']
-
+        current_token = get_jwt_identity()
 
         for i in range(user.count()):
-            profileUrl = list(user[i].values())[3]
-            tourName = list(SocialLogin.user[i].values())[4]
+            if current_token == list(user[i].values())[1]:
+                profileUrl = list(user[i].values())[3]
+                tourName = list(user[i].values())[4]
+                success_response = {
+                    "result": "Success",
+                    "profileUrl": profileUrl,
+                    "reqComment": [
+                        {
+                            "tourName": tourName,
+                            "tourImage": "Undefined"
+                        }
+                    ],
+                    "recommendSpot": [
+                        {
+                            "reqTime": 500,
+                            "Theme": "Undefined"
+                        }
+                    ],
+                    "reqShare": [
+                        {
+                            "tourName": tourName,
+                            "tourImage": "Undefined"
+                        }
+                    ]
+                }
 
-        success_response = {
-            "result": "Success",
-            "profileUrl": list(user[i].values())[3],
-            "reqComment": [
-                {
-                    "tourName": "Undefined",
-                    "tourImage": "Undefined"
-                }
-            ],
-            "recommendSpot": [
-                {
-                    "reqTime": 500,
-                    "Theme": "Undefined"
-                }
-            ],
-            "reqShare": [
-                {
-                    "tourName": list(SocialLogin.user[i].values())[4],
-                    "tourImage": "Undefined"
-                }
-            ]
-        }
         return success_response, 200

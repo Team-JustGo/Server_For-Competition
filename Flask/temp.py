@@ -38,7 +38,7 @@ multi_user_id = []
 for i in range(user.count()):
     multi_user_id.append(list(user[i].values())[1])
 
-print(multi_user_id)
+print(list(user[1].values()))
 
 pprint.pprint(collection_user.find_one({'profileName': '김재훈'}))
 
