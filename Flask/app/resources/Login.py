@@ -6,13 +6,12 @@ from resources import connect
 
 class SocialLogin(Resource):
 
-
     def post(self):
 
         parser = reqparse.RequestParser()
-        parser.add_argument('userId',type=str,required=True)
-        parser.add_argument('name',type=str)
-        parser.add_argument('picture',type=str)
+        parser.add_argument('userId', type=str, required=True)
+        parser.add_argument('name', type=str)
+        parser.add_argument('picture', type=str)
         requests = parser.parse_args()
         user = connect.user
         _userId = requests['userId']
@@ -22,30 +21,23 @@ class SocialLogin(Resource):
         success_200 = {"result": "Success",
                        "jwt": access_token}
         multi_user_id = []
-        second_situation = {"profileImage": _picture,
-                            "profileName": _name,
-                            "userId": _userId,
-                            "wentspot": [
-                                {
-                                    "tourId": "Undefined"
-                                }
-                            ]}     # DB에 회원가입 정보 저장(Input: userName, profileImage | Output:
+        second_situation =  # DB에 회원가입 정보 저장(Input: userName, profileImage | Output:
 
-        for i in range(user.count()):
-            multi_user_id.append(list(user[i].values())[1])
+        user_in_list = connect.db.user.find_one({"userId": _userId})
 
-        print(multi_user_id)
+        if user_in_list:
+            return success_200, 200
 
-        for j in range(user.count()):
-            if _userId in multi_user_id:
-                return success_200, 200
+        elif not user_in_list and _userId and _name and _picture:
+            connect.in_user.insert_one({"profileImage": _picture,
+                                        "profileName": _name,
+                                        "userId": _userId,
+                                        "wentspot": [
+                                            {
+                                                "tourId": "Undefined"
+                                            }
+                                        ]})
+            return success_200, 200
 
-            if (_userId not in multi_user_id) and _userId and _name and _picture:
-                connect.in_user.insert_one(second_situation)
-                return success_200, 200
-
-            if (_userId not in multi_user_id) and _userId == None and _name == None and _picture == None:
-                return {"result": "I am a teapot"}, 418
-
-
-
+        elif not (_userId and _name and _picture):
+            return {"result": "I am a teapot"}, 418
