@@ -9,10 +9,9 @@ class SocialLogin(Resource):
 
     def post(self):
         user = connect.user
-        payload = request.json
-        _userId = payload['userId']
-        _name = payload['name']
-        _picture = payload['picture']
+        _userId = request.json['userId']
+        _name = request.json['name']
+        _picture = request.json['picture']
         access_token = create_access_token(_userId)
         success_200 = {"result": "Success",
                        "jwt": access_token}
