@@ -1,12 +1,13 @@
 from pymongo import MongoClient
 import os
-from flask import Flask, jsonify
+from flask import Flask, jsonify, Response
 from flask_restful import Api, Resource, reqparse
+import pprint
 
 
-uri = "mongodb://{user}:{password}@ds018508.mlab.com:18508/justgo".format(**connection_set)
+uri = "mongodb://by09115:hunter5402@ds018508.mlab.com:18508/justgo"
+
 client = MongoClient(uri)
-
 db = client["justgo"]
 
 collection_contact = db.contact
@@ -33,8 +34,15 @@ for i in range(user.count()):
         print("Success")
 """
 
-print(list(user[0].values()))
+multi_user_id = []
+for i in range(user.count()):
+    multi_user_id.append(list(user[i].values())[1])
 
+print(multi_user_id)
+
+pprint.pprint(collection_user.find_one({'profileName': '김재훈'}))
+
+"""
 success_response = {
                     "result": "Success",
                     "profileUrl": list(user[i].values())[3],
@@ -57,4 +65,13 @@ success_response = {
                         }
                     ]
                 }
-                return success_response, 200
+
+
+return Response(success_response, 777)
+
+parser = reqparse.RequestParser()
+        parser.add_argument('X-Access-Token', type=str, required=True)
+        args = parser.parse_args()
+        _Token = args['X-Access-Token']
+
+"""
