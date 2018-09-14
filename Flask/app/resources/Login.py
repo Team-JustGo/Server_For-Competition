@@ -9,15 +9,15 @@ class SocialLogin(Resource):
 
     def post(self):
 
-        #parser = reqparse.RequestParser()
-        #parser.add_argument('userId',type=str,required=True)
-        #parser.add_argument('name',type=str)
-        #parser.add_argument('picture',type=str)
-        requests = request.get_json()
+        parser = reqparse.RequestParser()
+        parser.add_argument('userId',type=str,required=True)
+        parser.add_argument('name',type=str)
+        parser.add_argument('picture',type=str)
+        requests = parser.parse_args()
         user = connect.user
-        _userId = requests('userId', None)
-        _name = requests('name', None)
-        _picture = requests('picture', None)
+        _userId = requests['userId']
+        _name = requests['name']
+        _picture = requests['picture']
         access_token = create_access_token(_userId)
         success_200 = {"result": "Success",
                        "jwt": access_token}
