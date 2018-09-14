@@ -404,6 +404,10 @@ definitions:
         items:
           type: "object"
           properties:
+            lat:
+              type: "number"
+            lng:
+              type: "number"
             reqtime:
               type: "number"
             rate:
