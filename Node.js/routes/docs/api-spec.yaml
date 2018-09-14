@@ -244,16 +244,16 @@ paths:
         type: "string"
         required: true
         description: "여행지 주제(ex. 자연,힐링,!사랑,먹거리장터,특화거리)"
-      - name: "minTime"
+      - name: "minDistance"
         in: "query"
         type: "number"
         required: true
-        description: "최소 걸리는 시간, 분 단위"
-      - name: "maxTime"
+        description: "최소 거리, m 단위"
+      - name: "maxDistance"
         in: "query"
         type: "number"
         required: true
-        description: "최대 걸리는 시간, 분 단위"
+        description: "최대 거리, m 단위"
       responses:
         200:
           description: "요청 성공"
