@@ -22,7 +22,7 @@ class UserMain(Resource):
                     "profileUrl": profileUrl,
                     "reqComment": [
                         {
-                            "tourName": tourName,
+                            "tourName": tourName.encode('utf-8'),
                             "tourImage": "Undefined"
                         }
                     ],
@@ -34,7 +34,7 @@ class UserMain(Resource):
                     ],
                     "reqShare": [
                         {
-                            "tourName": tourName,
+                            "tourName": tourName.encode('utf-8'),
                             "tourImage": "Undefined"
                         }
                     ]
