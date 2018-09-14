@@ -9,13 +9,13 @@ class SocialLogin(Resource):
 
     def post(self):
 
-        parser = reqparse.RequestParser()
-        parser.add_argument('userId',type=str,required=True)
-        parser.add_argument('name',type=str)
-        parser.add_argument('picture',type=str)
-        requests = parser.parse_args()
+        #parser = reqparse.RequestParser()
+        #parser.add_argument('userId',type=str,required=True)
+        #parser.add_argument('name',type=str)
+        #parser.add_argument('picture',type=str)
+        #requests = parser.parse_args()
         user = connect.user
-        _userId = requests['userId']
+        _userId = request.json.get('userId', None)
         _name = requests['name']
         _picture = requests['picture']
         access_token = create_access_token(_userId)
@@ -38,6 +38,7 @@ class SocialLogin(Resource):
 
         for j in range(user.count()):
             if _userId in multi_user_id:
+                get_jwt_identity(access_token)
                 return success_200, 200
 
             if (_userId not in multi_user_id) and _userId and _name and _picture:
