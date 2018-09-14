@@ -38,8 +38,7 @@ class SocialLogin(Resource):
 
         for j in range(user.count()):
             if _userId in multi_user_id:
-                current_token = get_jwt_identity()
-                return success_200, current_token, 200
+                return success_200, 200
 
             if (_userId not in multi_user_id) and _userId and _name and _picture:
                 connect.in_user.insert_one(second_situation)

@@ -18,6 +18,7 @@ class UserMain(Resource):
                 tourName = list(user[i].values())[4]
                 success_response = {
                     "result": "Success",
+                    "identity": current_token,
                     "profileUrl": profileUrl,
                     "reqComment": [
                         {
