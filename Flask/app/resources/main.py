@@ -1,4 +1,6 @@
 from flask_restful import reqparse, Resource
+from flask import request
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 from app.resources import connect, Login
 
 
@@ -6,12 +8,10 @@ class UserMain(Resource):
 
     def get(self):
 
-        parser = reqparse.RequestParser()
-        parser.add_argument('X-Access-Token', type=str, required=True)
-        args = parser.parse_args()
-        _Token = args['X-Access-Token']
-
         user = connect.user
+        payload = request.json
+        _X_TOKEN = payload['X-Access-Token']
+
 
         for i in range(user.count()):
             profileUrl = list(user[i].values())[3]
