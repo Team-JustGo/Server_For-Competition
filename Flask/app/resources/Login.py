@@ -5,17 +5,16 @@ from resources import connect
 
 
 class SocialLogin(Resource):
-    parser = reqparse.RequestParser()
-    parser.add_argument('userId', type=str, required=True)
-    parser.add_argument('name', type=str)
-    parser.add_argument('picture', type=str)
-    requests = parser.parse_args()
 
     def post(self):
-
-        _userId = SocialLogin.requests['userId']
-        _name = SocialLogin.requests['name']
-        _picture = SocialLogin.requests['picture']
+        parser = reqparse.RequestParser()
+        parser.add_argument('userId', type=str, required=True)
+        parser.add_argument('name', type=str)
+        parser.add_argument('picture', type=str)
+        requests = parser.parse_args()
+        _userId = requests['userId']
+        _name = requests['name']
+        _picture = requests['picture']
         success_200 = {"result": "Success",
                        "jwt": create_access_token(_userId)}
         user_in_list = connect.db.user.find_one({"userId": _userId})
