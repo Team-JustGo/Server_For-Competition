@@ -5,24 +5,19 @@ from resources import connect
 
 
 class SocialLogin(Resource):
+    parser = reqparse.RequestParser()
+    parser.add_argument('userId', type=str, required=True)
+    parser.add_argument('name', type=str)
+    parser.add_argument('picture', type=str)
+    requests = parser.parse_args()
 
     def post(self):
 
-        parser = reqparse.RequestParser()
-        parser.add_argument('userId', type=str, required=True)
-        parser.add_argument('name', type=str)
-        parser.add_argument('picture', type=str)
-        requests = parser.parse_args()
-        user = connect.user
-        _userId = requests['userId']
-        _name = requests['name']
-        _picture = requests['picture']
-        access_token = create_access_token(_userId)
+        _userId = SocialLogin.requests['userId']
+        _name = SocialLogin.requests['name']
+        _picture = SocialLogin.requests['picture']
         success_200 = {"result": "Success",
-                       "jwt": access_token}
-        multi_user_id = []
-        second_situation =  # DB에 회원가입 정보 저장(Input: userName, profileImage | Output:
-
+                       "jwt": create_access_token(_userId)}
         user_in_list = connect.db.user.find_one({"userId": _userId})
 
         if user_in_list:
