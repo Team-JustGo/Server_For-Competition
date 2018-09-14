@@ -26,8 +26,6 @@ paths:
       description: "페이스북 및 카카오 계정으로 로그인하기(웹 메인 페이지 통합)"
       operationId: "userLogin"
       consumes:
-      - "application/json"
-      - "application/x-www-form-urlencoded"
       - "multipart/form-data"
       produces:
       - "application/json"
@@ -46,7 +44,7 @@ paths:
         type: "file"
         description: "사진"
       responses:
-        100:
+        418:
           description: "회원가입 정보가 필요함"
           schema:
             $ref: '#/definitions/Result'
@@ -271,6 +269,11 @@ paths:
       - "travel"
       summary: "경로 얻기"
       description: "여행지까지의 경로 얻기"
+      consumes:
+      - application/json
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
       parameters: 
         - name: "test"
           in: "query"
@@ -289,6 +292,11 @@ paths:
       - "travel"
       summary: "관광지 정보 얻기"
       description: "해당 id의 관광지 정보 얻기"
+      consumes:
+      - application/json
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
       parameters: 
       - name: "id"
         in: "path"
@@ -309,12 +317,27 @@ paths:
       - "travel"
       summary: "후기 남기기"
       description: "id에 해당하는 관광지에 후기 남기기"
+      consumes:
+      - application/json
+      - application/x-www-form-urlencoded
+      produces:
+      - application/json
       parameters: 
+      - name: X-Access-Token
+        in: header
+        type: string
+        required: true
+        description: JWT
       - name: "id"
         in: "path"
         type: "string"
         required: true
         description: "관광지 아이디"
+      - name: content
+        in: formData
+        type: string
+        required: true
+        description: 내용
       responses:
         201:
           description: "작성 성공"
