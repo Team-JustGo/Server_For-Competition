@@ -1,9 +1,9 @@
 from flask import Flask, jsonify, request, url_for
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 from flask_restful import Api
-from app.resources.Login import SocialLogin
-from app.resources.main import UserMain
-import app.resources.connect
+from resources.Login import SocialLogin
+from resources.main import UserMain
+import resources.connect
 
 app = Flask(__name__)
 app.config['JWT_SECRET_KEY'] = "INEEDMORESPEED"

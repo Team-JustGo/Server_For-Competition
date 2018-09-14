@@ -1,7 +1,7 @@
 from flask_restful import reqparse, Resource
 from flask import request
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
-from app.resources import connect, Login
+from resources import connect, Login
 
 
 class UserMain(Resource):

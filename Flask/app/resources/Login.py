@@ -1,7 +1,7 @@
 from flask import request, Response, jsonify
 from flask_restful import Resource
 from flask_jwt_extended import create_access_token, JWTManager, jwt_required, get_jwt_identity
-from app.resources import connect
+from resources import connect
 
 
 class SocialLogin(Resource):
