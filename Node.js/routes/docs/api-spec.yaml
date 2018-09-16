@@ -208,6 +208,7 @@ paths:
           description: "작성 성공"
           schema:
             $ref: '#/definitions/Result'
+      deprecated: true
   /travel/tour-list:
     get:
       tags:
@@ -219,16 +220,7 @@ paths:
       - "application/x-www-form-urlencoded"
       produces: 
       - "application/json"
-      parameters: 
-      - name: "transport"
-        in: "query"
-        enum: 
-        - "0: 자동차"
-        - "1: 대중교통"
-        - "2: 도보"
-        description: "교통수단"
-        type: "integer"
-        required: true
+      parameters:
       - name: "lat"
         in: "query"
         type: "number"
@@ -259,10 +251,6 @@ paths:
           description: "요청 성공"
           schema:
             $ref: '#/definitions/TourList'
-        405:
-          description: "transport가 지정된 번호가 아닐 경우"
-          schema:
-            $ref: '#/definitions/Result'
   /travel/direction:
     get:
       tags:
@@ -274,12 +262,16 @@ paths:
       - application/x-www-form-urlencoded
       produces:
       - application/json
-      parameters: 
-        - name: "test"
-          in: "query"
-          type: "string"
-          required: true
-          description: "테스트"
+      parameters:         
+      - name: "transport"
+        in: "query"
+        enum: 
+        - "0: 자동차"
+        - "1: 대중교통"
+        - "2: 도보"
+        description: "교통수단"
+        type: "integer"
+        required: true
       responses:
         200:
           description: "요청 성공"
@@ -381,7 +373,7 @@ definitions:
         items:
           type: "object"
           properties:
-            reqTime:
+            distance:
               type: "integer"
             theme:
               type: "string"
@@ -408,7 +400,7 @@ definitions:
               type: "number"
             lng:
               type: "number"
-            reqtime:
+            distance:
               type: "number"
             rate:
               type: "number"
