@@ -4,7 +4,7 @@ const rp = require('request-promise');
 router.post('/login', (req, res) => {
   const { userId, name, picture } = req.body;
   rp({
-    url: 'localhost:5000/api/user/login',
+    url: 'http://localhost:5000/api/user/login',
     method: 'POST',
     body: {
       userId,
