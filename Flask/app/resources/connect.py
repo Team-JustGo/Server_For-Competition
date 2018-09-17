@@ -8,6 +8,8 @@ connection_set = {
 uri = "mongodb://{user}:{password}@ds018508.mlab.com:18508/justgo".format(**connection_set)
 db = MongoClient(uri)["justgo"]
 
+in_user = db.user
+
 user = db.user.find()
 
 contact = db.contact.find()

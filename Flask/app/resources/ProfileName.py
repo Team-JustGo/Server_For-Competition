@@ -16,7 +16,7 @@ class ChangeProfileName(Resource):
         token_for_userId = connect.db.user.find_one({"userId": follow_jwt})
 
         if token_for_userId:
-            connect.db.user.update({"userId": follow_jwt}, { $set: {"name": _profile_name}})
+            connect.db.user.update({"userId": follow_jwt}, {"$set": {"name": _profile_name}})
             return {"result": "Success"}, 205
 
         elif not token_for_userId:

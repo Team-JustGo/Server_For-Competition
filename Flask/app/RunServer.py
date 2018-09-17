@@ -12,11 +12,14 @@ app.config['JWT_SECRET_KEY'] = "INEEDMORESPEED"
 jwt = JWTManager(app)
 api = Api(app)
 
+@app.route('/')
+def helloworld():
+    return "<h1>Welcome to Just-go&#39;s second API Server!</h1><p>This API will give you many data! It so fun!</p><p>~~[This page is TEST]</p>"
 
 api.add_resource(SocialLogin, '/api/user/login')
 api.add_resource(UserMain, '/api/user/main')
 api.add_resource(ChangeProfileImage, '/api/user/profile-image')
-api.add_resource(ChangeProfileName, 'api/user/profile-name')
+api.add_resource(ChangeProfileName, '/api/user/profile-name')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug=True, port=5000)
+    app.run(host='0.0.0.0',debug=True, port=7777)

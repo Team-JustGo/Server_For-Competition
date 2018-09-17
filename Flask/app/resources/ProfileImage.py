@@ -16,7 +16,7 @@ class ChangeProfileImage(Resource):
         userId_in_lists = connect.db.user.find_one({"userId": token_to_user})
 
         if userId_in_lists:
-            connect.db.user.update({"name": token_to_user}, { $set: {"profileImage": _profile_image}})
+            connect.db.user.update({"name": token_to_user}, {"$set": {"profileImage": _profile_image}})
             return {"result": "Success"}, 205
 
         elif not userId_in_lists:
