@@ -1,6 +1,5 @@
 from flask_restful import Resource, reqparse
 from resources import connect
-from pymongo
 from flask_jwt_extended import get_jwt_identity, jwt_required
 
 
