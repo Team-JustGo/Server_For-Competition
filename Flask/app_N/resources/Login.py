@@ -4,7 +4,7 @@ from flask_restful import Resource, reqparse
 from resources import connect
 from werkzeug.utils import secure_filename
 
-from Flask.app_N import RunServer
+from ..RunServer import app
 
 
 class SocialLogin(Resource):
@@ -19,8 +19,8 @@ class SocialLogin(Resource):
         _name = requests['name']
         _picture = requests['picture']
         filename = secure_filename(_picture.filename)
-        RunServer.saveinfo(_picture, filename)
-        ImageUrl = RunServer.ImageUrl(filename)
+        app.saveinfo(_picture, filename)
+        ImageUrl = app.ImageUrl(filename)
         success_200 = {"result": "Success",
                        "jwt": create_access_token(_userId),
                        "image-url": ImageUrl}
