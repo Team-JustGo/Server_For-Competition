@@ -4,8 +4,6 @@ from flask_restful import Resource, reqparse
 from justgo_flask.app_N.resources import connect
 from werkzeug.utils import secure_filename
 
-from justgo_flask.RunServer import saveinfo, ImageUrl
-
 
 class SocialLogin(Resource):
 
@@ -19,8 +17,8 @@ class SocialLogin(Resource):
         _name = requests['name']
         _picture = requests['picture']
         filename = secure_filename(_picture.filename)
-        saveinfo(_picture, filename)
-        ImageUrl_ = ImageUrl(filename)
+        connect.saveinfo(_picture, filename)
+        ImageUrl_ = connect.ImageUrl(filename)
         success_200 = {"result": "Success",
                        "jwt": create_access_token(_userId),
                        "image-url": ImageUrl_}
