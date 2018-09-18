@@ -33,7 +33,7 @@ def upload_file():
             return redirect(request.url)
         file = request.files['file']
         if file.filename == '':
-            flash('No selected file'
+            flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
