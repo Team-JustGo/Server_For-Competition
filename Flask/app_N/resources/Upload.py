@@ -3,9 +3,6 @@ from flask import Flask, flash, request, redirect, redirect, url_for, send_from_
 from flask_restful import Resource
 from werkzeug.utils import secure_filename
 
-import RunServer
-
-
 class UploadImages(Resource):
     UPLOAD_FOLDER = './FileHAM'
     ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'bmp', 'gif', 'png'])
