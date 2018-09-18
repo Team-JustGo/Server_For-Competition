@@ -27,6 +27,8 @@ class SocialLogin(Resource):
         user_in_list = connect.db.user.find_one({"userId": _userId})
 
         if user_in_list:
+            if _picture:
+                connect.db.user.update({"name": _userId}, {"$set": {"profileImage": ImageUrl}})
             return success_200, 200
 
         elif not user_in_list and _userId and _name and _picture:
