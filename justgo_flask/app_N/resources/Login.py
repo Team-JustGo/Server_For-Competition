@@ -1,7 +1,7 @@
 import werkzeug
 from flask_jwt_extended import create_access_token
 from flask_restful import Resource, reqparse
-from justgo_flask.app_N.resources import connect
+from app_N.resources import connect
 from werkzeug.utils import secure_filename
 
 

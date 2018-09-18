@@ -1,10 +1,8 @@
 import werkzeug
 from flask_restful import Resource, reqparse
-from justgo_flask.app_N.resources import connect
+from app_N.resources import connect
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from werkzeug.utils import secure_filename
-from justgo_flask import RunServer
-
 
 class ChangeProfileImage(Resource):
     user = connect.user
@@ -16,8 +14,8 @@ class ChangeProfileImage(Resource):
         _parsed = parser.parse_args()
         _profile_image = _parsed['profile-image']
         filename = secure_filename(_profile_image.filename)
-        RunServer.saveinfo(_profile_image, filename)
-        ImageUrl = RunServer.ImageUrl(filename)
+        connect.saveinfo(_profile_image, filename)
+        ImageUrl = connect.ImageUrl(filename)
         token_to_user = get_jwt_identity()
         userId_in_lists = connect.db.user.find_one({"userId": token_to_user})
 
