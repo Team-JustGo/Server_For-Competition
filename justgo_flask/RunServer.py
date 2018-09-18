@@ -2,11 +2,12 @@ import os
 from flask import Flask, flash, redirect, jsonify, request, url_for, send_from_directory
 from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
 from flask_restful import Api, Resource
-from resources.Login import SocialLogin
-from resources.main import UserMain
-from resources.ProfileImage import ChangeProfileImage
-from resources.ProfileName import ChangeProfileName
-from resources import connect
+
+from justgo_flask.app_N.resources.Login import SocialLogin
+from justgo_flask.app_N.resources.main import UserMain
+from justgo_flask.app_N.resources.ProfileImage import ChangeProfileImage
+from justgo_flask.app_N.resources.ProfileName import ChangeProfileName
+from justgo_flask.app_N.resources import connect
 
 UPLOAD_FOLDER = './FileHAM'
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'bmp', 'gif', 'png'])

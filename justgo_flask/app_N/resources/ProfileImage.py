@@ -1,9 +1,9 @@
 import werkzeug
 from flask_restful import Resource, reqparse
-from resources import connect
+from justgo_flask.app_N.resources import connect
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from werkzeug.utils import secure_filename
-from JustGo2ndAPI.app_N import RunServer
+from justgo_flask import RunServer
 
 
 class ChangeProfileImage(Resource):

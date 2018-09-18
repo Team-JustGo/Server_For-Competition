@@ -1,10 +1,10 @@
 import werkzeug
 from flask_jwt_extended import create_access_token
 from flask_restful import Resource, reqparse
-from resources import connect
+from justgo_flask.app_N.resources import connect
 from werkzeug.utils import secure_filename
 
-from justgo_flask.app_N.RunServer import saveinfo, ImageUrl
+from justgo_flask.RunServer import saveinfo, ImageUrl
 
 
 class SocialLogin(Resource):

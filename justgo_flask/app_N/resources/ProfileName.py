@@ -1,5 +1,5 @@
 from flask_restful import Resource
-from resources import connect
+from justgo_flask.app_N.resources import connect
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 
