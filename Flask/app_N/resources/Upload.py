@@ -19,4 +19,5 @@ class UploadImages(Resource):
             go_link = url_for('uploaded_file', filename=filename)
             return go_link
 
+    def GET(self):
         return "COMMON_IMAGES_SERVER"
