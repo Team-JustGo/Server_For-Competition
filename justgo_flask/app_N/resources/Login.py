@@ -16,9 +16,13 @@ class SocialLogin(Resource):
         _userId = requests['userId']
         _name = requests['name']
         _picture = requests['picture']
-        filename = secure_filename(_picture.filename)
-        connect.saveinfo(_picture, filename)
-        ImageUrl_ = connect.ImageUrl(filename)
+        if _picture:
+            filename = secure_filename(_picture.filename)
+            connect.saveinfo(_picture, filename)
+            ImageUrl_ = connect.ImageUrl(filename)
+        elif not _picture:
+            ImageUrl_ = None
+
         success_200 = {"result": "Success",
                        "jwt": create_access_token(_userId),
                        "image-url": ImageUrl_}
