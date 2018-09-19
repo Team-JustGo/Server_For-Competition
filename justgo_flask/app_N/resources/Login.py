@@ -34,14 +34,14 @@ class SocialLogin(Resource):
             return success_200, 200
 
         elif not user_in_list and _userId and _name and _picture:
-            connect.in_user.insert_one({"profileImage": _picture,
-                                        "profileName": _name,
-                                        "userId": ImageUrl_,
-                                        "wentspot": [
-                                            {
-                                                "tourId": "Undefined"
-                                            }
-                                        ]})
+            connect.in_user.insert({"profileImage": _picture,
+                                    "profileName": _name,
+                                    "userId": ImageUrl_,
+                                    "wentspot": [
+                                        {
+                                            "tourId": "Undefined"
+                                        }
+                                    ]})
             return success_200, 200
 
         elif not (_userId and _name and _picture):
