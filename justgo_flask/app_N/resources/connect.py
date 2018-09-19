@@ -22,7 +22,7 @@ def saveinfo(announce, filename):
 
 
 def ImageUrl(filename):
-    url_for('uploaded_file', filename=filename)
+    return url_for('uploaded_file', filename=filename)
 
 
 def allowed_file(filename):
