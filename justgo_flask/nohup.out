@@ -1,0 +1,487 @@
+ * Serving Flask app "RunServer" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:7777/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+14.50.190.131 - - [19/Sep/2018 01:29:55] "GET /uploads/1.PNG HTTP/1.1" 200 -
+14.50.190.131 - - [19/Sep/2018 01:30:27] "POST /api/user/login HTTP/1.1" 200 -
+14.50.190.131 - - [19/Sep/2018 01:30:43] "GET /uploads/JEONSEUNGMIN.gif HTTP/1.1" 200 -
+14.50.190.131 - - [19/Sep/2018 01:30:47] "GET /uploads/JEONSEUNGMIN.gif HTTP/1.1" 304 -
+14.50.190.131 - - [19/Sep/2018 05:38:09] "POST /api/user/login HTTP/1.1" 200 -
+35.229.103.111 - - [19/Sep/2018 07:25:34] "GET / HTTP/1.1" 404 -
+35.229.103.111 - - [19/Sep/2018 07:25:35] "GET /HNAP1/ HTTP/1.1" 404 -
+211.187.83.119 - - [19/Sep/2018 12:50:30] "POST /user/login HTTP/1.1" 404 -
+211.187.83.119 - - [19/Sep/2018 13:00:29] "POST /user/login HTTP/1.1" 404 -
+211.187.83.119 - - [19/Sep/2018 13:01:00] "GET /user/login HTTP/1.1" 404 -
+211.187.83.119 - - [19/Sep/2018 13:01:01] "GET /favicon.ico HTTP/1.1" 404 -
+211.187.83.119 - - [19/Sep/2018 13:02:34] "POST /api/user/login HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2295, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1741, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 480, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 595, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 19, in post
+    filename = secure_filename(_picture.filename)
+AttributeError: 'NoneType' object has no attribute 'filename'
+175.223.20.40 - - [19/Sep/2018 13:03:23] "POST /api/user/login HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2295, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1741, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 480, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 595, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 19, in post
+    filename = secure_filename(_picture.filename)
+AttributeError: 'NoneType' object has no attribute 'filename'
+115.23.173.165 - - [19/Sep/2018 13:50:07] "POST /api/user/login HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2295, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1741, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 480, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 595, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 19, in post
+    filename = secure_filename(_picture.filename)
+AttributeError: 'NoneType' object has no attribute 'filename'
+175.223.20.40 - - [19/Sep/2018 13:50:12] "POST /api/user/login HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2295, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1741, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 480, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 595, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 19, in post
+    filename = secure_filename(_picture.filename)
+AttributeError: 'NoneType' object has no attribute 'filename'
+175.223.20.40 - - [19/Sep/2018 13:54:04] "POST /api/user/login HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2295, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1741, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 480, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 595, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 19, in post
+    filename = secure_filename(_picture.filename)
+AttributeError: 'NoneType' object has no attribute 'filename'
+175.223.20.40 - - [19/Sep/2018 13:54:25] "POST /api/user/login HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2295, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1741, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 480, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 595, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 19, in post
+    filename = secure_filename(_picture.filename)
+AttributeError: 'NoneType' object has no attribute 'filename'
+14.50.190.131 - - [19/Sep/2018 14:14:08] "POST /api/user/login HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2295, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1741, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 480, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 595, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 19, in post
+    filename = secure_filename(_picture.filename)
+AttributeError: 'NoneType' object has no attribute 'filename'
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+14.50.190.131 - - [19/Sep/2018 14:21:43] "POST /api/user/login HTTP/1.1" 200 -
+175.223.20.40 - - [19/Sep/2018 14:23:40] "POST /api/user/login HTTP/1.1" 418 -
+175.223.20.40 - - [19/Sep/2018 14:24:35] "POST /api/user/login HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2295, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1741, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 480, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 595, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 42, in post
+    "tourId": "Undefined"
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/collection.py", line 693, in insert_one
+    session=session),
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/collection.py", line 607, in _insert
+    bypass_doc_val, session)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/collection.py", line 595, in _insert_one
+    acknowledged, _insert_command, session)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1243, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1196, in _retry_with_session
+    return func(session, sock_info, retryable)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/collection.py", line 590, in _insert_command
+    retryable_write=retryable_write)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/pool.py", line 584, in command
+    self._raise_connection_failure(error)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/pool.py", line 745, in _raise_connection_failure
+    raise error
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/pool.py", line 579, in command
+    unacknowledged=unacknowledged)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/network.py", line 114, in command
+    codec_options, ctx=compression_ctx)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/message.py", line 679, in _op_msg
+    flags, command, identifier, docs, check_keys, opts)
+bson.errors.InvalidDocument: Cannot encode object: <FileStorage: '1.jpg' ('image/jpeg')>
+14.50.190.131 - - [19/Sep/2018 14:25:24] "POST /api/user/login HTTP/1.1" 418 -
+175.223.20.40 - - [19/Sep/2018 14:26:41] "POST /api/user/login HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2295, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1741, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 480, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 595, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 42, in post
+    "tourId": "Undefined"
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/collection.py", line 693, in insert_one
+    session=session),
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/collection.py", line 607, in _insert
+    bypass_doc_val, session)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/collection.py", line 595, in _insert_one
+    acknowledged, _insert_command, session)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1243, in _retryable_write
+    return self._retry_with_session(retryable, func, s, None)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/mongo_client.py", line 1196, in _retry_with_session
+    return func(session, sock_info, retryable)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/collection.py", line 590, in _insert_command
+    retryable_write=retryable_write)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/pool.py", line 584, in command
+    self._raise_connection_failure(error)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/pool.py", line 745, in _raise_connection_failure
+    raise error
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/pool.py", line 579, in command
+    unacknowledged=unacknowledged)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/network.py", line 114, in command
+    codec_options, ctx=compression_ctx)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/pymongo/message.py", line 679, in _op_msg
+    flags, command, identifier, docs, check_keys, opts)
+bson.errors.InvalidDocument: Cannot encode object: <FileStorage: 'ㅇ.png' ('image/png')>
+175.223.20.40 - - [19/Sep/2018 14:28:30] "POST /api/user/login HTTP/1.1" 418 -
+175.223.20.40 - - [19/Sep/2018 14:28:38] "POST /api/user/login HTTP/1.1" 418 -
+14.50.190.131 - - [19/Sep/2018 14:28:39] "POST /api/user/login HTTP/1.1" 200 -
+14.50.190.131 - - [19/Sep/2018 14:28:46] "POST /api/user/login HTTP/1.1" 200 -
+175.223.20.40 - - [19/Sep/2018 14:28:48] "POST /api/user/login HTTP/1.1" 418 -
+14.50.190.131 - - [19/Sep/2018 14:28:48] "POST /api/user/login HTTP/1.1" 200 -
+110.70.27.140 - - [19/Sep/2018 14:43:57] "POST /api/user/login HTTP/1.1" 418 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+110.70.27.140 - - [19/Sep/2018 14:49:22] "POST /api/user/login HTTP/1.1" 400 -
+110.70.27.140 - - [19/Sep/2018 14:50:44] "POST /api/user/login HTTP/1.1" 418 -
+110.70.27.140 - - [19/Sep/2018 14:51:05] "POST /api/user/login HTTP/1.1" 400 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/RunServer.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/RunServer.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/RunServer.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+175.223.20.203 - - [20/Sep/2018 02:32:28] "POST /api/user/login HTTP/1.1" 418 -
+175.223.20.203 - - [20/Sep/2018 02:32:34] "POST /api/user/login HTTP/1.1" 400 -
+175.223.20.203 - - [20/Sep/2018 02:32:48] "POST /api/user/login HTTP/1.1" 418 -
+175.223.20.203 - - [20/Sep/2018 02:33:13] "POST /api/user/login HTTP/1.1" 400 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+ * Serving Flask app "RunServer" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:7777/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+175.223.20.203 - - [20/Sep/2018 02:44:49] "POST /api/user/login HTTP/1.1" 200 -
+175.223.20.203 - - [20/Sep/2018 02:45:36] "GET /uploads/IMG_0932.JPG HTTP/1.1" 200 -
+175.223.48.82 - - [20/Sep/2018 03:47:22] "POST /api/user/login HTTP/1.1" 418 -
+175.223.48.82 - - [20/Sep/2018 03:47:31] "POST /api/user/login HTTP/1.1" 418 -
+175.223.48.82 - - [20/Sep/2018 03:47:36] "POST /api/user/login HTTP/1.1" 418 -
+175.223.48.82 - - [20/Sep/2018 03:47:42] "POST /api/user/login HTTP/1.1" 200 -
+66.249.82.181 - - [20/Sep/2018 03:48:14] "GET /uploads/png HTTP/1.1" 200 -
+175.223.48.82 - - [20/Sep/2018 03:48:14] "GET /uploads/png HTTP/1.1" 200 -
+121.130.242.247 - - [20/Sep/2018 03:49:54] "POST /api/user/login HTTP/1.1" 418 -
+124.5.192.33 - - [20/Sep/2018 04:46:07] "POST /api/user/login HTTP/1.1" 418 -
+124.5.192.33 - - [20/Sep/2018 04:48:13] "POST /api/user/login HTTP/1.1" 418 -
+175.223.48.82 - - [20/Sep/2018 04:48:28] "POST /api/user/login HTTP/1.1" 200 -
+124.5.192.33 - - [20/Sep/2018 04:51:01] "POST /api/user/login HTTP/1.1" 418 -
+124.5.192.33 - - [20/Sep/2018 04:55:47] "POST /api/user/login HTTP/1.1" 418 -
+175.223.48.82 - - [20/Sep/2018 05:06:12] "POST /api/user/login HTTP/1.1" 200 -
+126.120.243.241 - - [20/Sep/2018 05:07:17] "POST /api/user/login HTTP/1.1" 418 -
+175.223.27.80 - - [20/Sep/2018 07:13:21] "POST /api/user/login HTTP/1.1" 200 -
+126.120.243.241 - - [20/Sep/2018 07:32:38] "POST /api/user/login HTTP/1.1" 418 -
+126.120.243.241 - - [20/Sep/2018 07:33:51] "POST /api/user/login HTTP/1.1" 418 -
+126.120.243.241 - - [20/Sep/2018 07:33:53] "POST /api/user/login HTTP/1.1" 418 -
+126.120.243.241 - - [20/Sep/2018 07:36:52] "POST /api/user/login HTTP/1.1" 400 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+Traceback (most recent call last):
+  File "RunServer.py", line 6, in <module>
+    from app_N.resources.Login import SocialLogin
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 27
+    "jwt": create_access_token(_userId,expires_delta=),
+                                                     ^
+SyntaxError: invalid syntax
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 63, in apport_excepthook
+    from apport.fileutils import likely_packaged, get_recent_crashes
+  File "/usr/lib/python3/dist-packages/apport/__init__.py", line 5, in <module>
+    from apport.report import Report
+  File "/usr/lib/python3/dist-packages/apport/report.py", line 30, in <module>
+    import apport.fileutils
+  File "/usr/lib/python3/dist-packages/apport/fileutils.py", line 23, in <module>
+    from apport.packaging_impl import impl as packaging
+  File "/usr/lib/python3/dist-packages/apport/packaging_impl.py", line 23, in <module>
+    import apt
+  File "/usr/lib/python3/dist-packages/apt/__init__.py", line 23, in <module>
+    import apt_pkg
+ModuleNotFoundError: No module named 'apt_pkg'
+
+Original exception was:
+Traceback (most recent call last):
+  File "RunServer.py", line 6, in <module>
+    from app_N.resources.Login import SocialLogin
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 27
+    "jwt": create_access_token(_userId,expires_delta=),
+                                                     ^
+SyntaxError: invalid syntax

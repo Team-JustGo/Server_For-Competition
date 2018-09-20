@@ -1,0 +1,121 @@
+Traceback (most recent call last):
+  File "RunServer.py", line 6, in <module>
+    from resources.ProfileImage import ChangeProfileImage
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/AdditNew/Server_For-Competition/Flask/app/resources/ProfileImage.py", line 3
+    from pymongo
+               ^
+SyntaxError: invalid syntax
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 63, in apport_excepthook
+    from apport.fileutils import likely_packaged, get_recent_crashes
+  File "/usr/lib/python3/dist-packages/apport/__init__.py", line 5, in <module>
+    from apport.report import Report
+  File "/usr/lib/python3/dist-packages/apport/report.py", line 30, in <module>
+    import apport.fileutils
+  File "/usr/lib/python3/dist-packages/apport/fileutils.py", line 23, in <module>
+    from apport.packaging_impl import impl as packaging
+  File "/usr/lib/python3/dist-packages/apport/packaging_impl.py", line 23, in <module>
+    import apt
+  File "/usr/lib/python3/dist-packages/apt/__init__.py", line 23, in <module>
+    import apt_pkg
+ModuleNotFoundError: No module named 'apt_pkg'
+
+Original exception was:
+Traceback (most recent call last):
+  File "RunServer.py", line 6, in <module>
+    from resources.ProfileImage import ChangeProfileImage
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/AdditNew/Server_For-Competition/Flask/app/resources/ProfileImage.py", line 3
+    from pymongo
+               ^
+SyntaxError: invalid syntax
+ * Serving Flask app "RunServer" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:7777/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+127.0.0.1 - - [17/Sep/2018 03:55:47] "POST /api/user/login HTTP/1.1" 418 -
+127.0.0.1 - - [17/Sep/2018 03:55:57] "POST /api/user/login HTTP/1.1" 400 -
+127.0.0.1 - - [17/Sep/2018 03:56:13] "POST /api/user/login HTTP/1.1" 400 -
+66.249.82.134 - - [17/Sep/2018 03:56:41] "GET / HTTP/1.1" 200 -
+66.249.82.135 - - [17/Sep/2018 03:56:41] "GET /favicon.ico HTTP/1.1" 404 -
+110.70.26.221 - - [17/Sep/2018 03:58:07] "POST /api/user/login HTTP/1.1" 500 -
+Traceback (most recent call last):
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2309, in __call__
+    return self.wsgi_app(environ, start_response)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2295, in wsgi_app
+    response = self.handle_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1741, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 273, in error_router
+    return original_handler(e)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/_compat.py", line 34, in reraise
+    raise value.with_traceback(tb)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 480, in wrapper
+    resp = resource(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask/views.py", line 88, in view
+    return self.dispatch_request(*args, **kwargs)
+  File "/home/ubuntu/.local/lib/python3.6/site-packages/flask_restful/__init__.py", line 595, in dispatch_request
+    resp = meth(*args, **kwargs)
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/AdditNew/Server_For-Competition/Flask/app/resources/Login.py", line 26, in post
+    connect.in_user.insert_one({"profileImage": _picture,
+AttributeError: module 'resources.connect' has no attribute 'in_user'
+66.249.82.134 - - [17/Sep/2018 04:47:23] "GET / HTTP/1.1" 200 -
+220.78.211.54 - - [17/Sep/2018 04:49:14] "GET / HTTP/1.1" 200 -
+220.78.211.54 - - [17/Sep/2018 04:49:15] "GET /favicon.ico HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 04:49:34] "POST /user/login HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 04:51:39] "POST /user/login HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 05:02:57] "POST /user/login HTTP/1.1" 404 -
+110.70.26.221 - - [17/Sep/2018 05:16:41] "POST /api/user/login HTTP/1.1" 418 -
+220.78.211.54 - - [17/Sep/2018 05:17:39] "POST /user/login HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 05:22:19] "POST / HTTP/1.1" 405 -
+220.78.211.54 - - [17/Sep/2018 05:22:31] "POST /api/user/login HTTP/1.1" 400 -
+220.78.211.54 - - [17/Sep/2018 05:22:42] "POST /api/user/login HTTP/1.1" 400 -
+220.78.211.54 - - [17/Sep/2018 05:24:03] "POST /api/user/login HTTP/1.1" 400 -
+220.78.211.54 - - [17/Sep/2018 05:24:18] "POST /api/user/login HTTP/1.1" 400 -
+220.78.211.54 - - [17/Sep/2018 05:24:42] "POST /api/user/login HTTP/1.1" 418 -
+220.78.211.54 - - [17/Sep/2018 05:27:24] "POST /user/login HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 05:27:57] "POST /api/user/login HTTP/1.1" 418 -
+220.78.211.54 - - [17/Sep/2018 05:28:37] "POST /user/login HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 05:29:11] "POST /user/login HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 05:29:21] "POST /api/user/login HTTP/1.1" 418 -
+220.78.211.54 - - [17/Sep/2018 06:24:10] "POST /user/login HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 06:25:08] "POST /user/login HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 06:25:25] "GET /user/login HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 06:25:34] "GET /api/user/login HTTP/1.1" 405 -
+220.78.211.54 - - [17/Sep/2018 06:25:44] "GET /api HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 06:26:11] "GET /user/login HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 06:31:58] "POST /user/login HTTP/1.1" 404 -
+220.78.211.54 - - [17/Sep/2018 06:34:34] "POST /user/login HTTP/1.1" 404 -
+211.46.119.148 - - [17/Sep/2018 13:19:24] "POST /api/user/login HTTP/1.1" 200 -
+211.46.119.148 - - [17/Sep/2018 13:19:34] "POST /api/user/login HTTP/1.1" 418 -
+211.46.119.148 - - [17/Sep/2018 13:20:19] "POST /api/user/login HTTP/1.1" 200 -
+211.46.119.148 - - [17/Sep/2018 13:21:28] "POST /api/user/login HTTP/1.1" 500 -
+ * Serving Flask app "RunServer" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:7777/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+211.46.119.148 - - [17/Sep/2018 13:38:39] "GET / HTTP/1.1" 200 -

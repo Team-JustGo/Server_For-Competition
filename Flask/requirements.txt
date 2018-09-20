@@ -1,4 +1,0 @@
-pymongo
-werkzeug
-flask
-mongoengine
