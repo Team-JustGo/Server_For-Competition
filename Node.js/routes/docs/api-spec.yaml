@@ -463,30 +463,30 @@ definitions:
         items:
           type: object
           properties:
-            id:
-              type: string
             title:
               type: string
             image:
               type: string
-            rate:
-              type: number
             address:
               type: string
-            theme:
-              type: string
+            lat:
+              type: number
+            lng:
+              type: number
       nearRestaurant:
         type: array
         items:
           type: object
           properties:
-            name:
-              type: string
-            address:
+            title:
               type: string
             image:
               type: string
-            rate:
+            address:
+              type: string
+            lat:
+              type: number
+            lng:
               type: number
       comment:
         type: array
