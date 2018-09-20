@@ -1,4 +1,4 @@
-# 문화데이터 활용 경진대회를 위한 서버
+# JustGo 서버
 
 ## 개요
 - 여행을 랜덤으로 추천해주는 어플리케이션, JustGo 서버입니다.
@@ -20,3 +20,5 @@
 ### 사용 모듈
 - Express
 - mongoose
+- jsonwebtoken
+- etc..
