@@ -27,6 +27,14 @@ class SocialLogin(Resource):
                        "jwt": create_access_token(_userId),
                        "image-url": ImageUrl_}
         user_in_list = connect.db.user.find_one({"userId": _userId})
+        signUp = {"profileImage": ImageUrl_,
+                  "profileName": _name,
+                  "userId": _userId,
+                  "wentspot": [
+                      {
+                          "tourId": "Undefined"
+                      }
+                  ]}
 
         if user_in_list:
             if _picture:
@@ -34,14 +42,7 @@ class SocialLogin(Resource):
             return success_200, 200
 
         elif not user_in_list and _userId and _name and _picture:
-            connect.in_user.insert({"profileImage": _picture,
-                                    "profileName": _name,
-                                    "userId": ImageUrl_,
-                                    "wentspot": [
-                                        {
-                                            "tourId": "Undefined"
-                                        }
-                                    ]})
+            connect.in_user.insert(signUp)
             return success_200, 200
 
         elif not (_userId and _name and _picture):

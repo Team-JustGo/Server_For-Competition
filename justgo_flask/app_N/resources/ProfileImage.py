@@ -10,7 +10,7 @@ class ChangeProfileImage(Resource):
     @jwt_required
     def put(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('profile-image', type=werkzeug.FileStorage(), required=True, location='files')
+        parser.add_argument('profile-image', type=werkzeug.FileStorage, required=True, location='files')
         _parsed = parser.parse_args()
         _profile_image = _parsed['profile-image']
         filename = secure_filename(_profile_image.filename)
