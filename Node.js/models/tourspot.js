@@ -2,6 +2,10 @@ const mongoose = require('mongoose');
 
 const TourSpot = new mongoose.Schema({
   placeid: String,
+  name: String,
+  address: String,
+  image: String,
+  theme: [String],
   lat: Number,
   lng: Number,
   comment: [{
