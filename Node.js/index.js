@@ -5,10 +5,11 @@ const logger = require('morgan');
 const mongoose = require('mongoose');
 const config = require('./config');
 
+const app = express();
+
 mongoose.connect(config.DB_URL, { useNewUrlParser: true })
   .then(() => console.log('connected to db'))
   .catch(err => new Error(err));
-const app = express();
 
 app.use(logger('common', { stream: fs.createWriteStream('justgo_server.log', { flags: 'w' }) }))
   .use(bodyParser.json())
