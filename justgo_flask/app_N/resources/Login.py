@@ -36,5 +36,5 @@ class SocialLogin(Resource):
             connect.in_user.insert(signUp)
             return success_200, 200     # DB에 userId가 없지만 userId와 name이 들어온 경우 - 회원가입
 
-        elif not (_userId and _name):
-            return {"result": "I am a teapot"}, 418
+        elif not user_in_list and _name:
+            return {"result": "I am a teapot"}, 418     # How wonderful!
