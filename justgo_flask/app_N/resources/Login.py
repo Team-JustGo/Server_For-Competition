@@ -11,23 +11,14 @@ class SocialLogin(Resource):
         parser = reqparse.RequestParser()
         parser.add_argument('userId', type=str, required=True)
         parser.add_argument('name', type=str)
-        parser.add_argument('picture', type=werkzeug.FileStorage, location='files')
         requests = parser.parse_args()
         _userId = requests['userId']
         _name = requests['name']
-        _picture = requests['picture']
-        if _picture:
-            filename = secure_filename(_picture.filename)
-            connect.saveinfo(_picture, filename)
-            ImageUrl_ = connect.ImageUrl(filename)
-        elif not _picture:
-            ImageUrl_ = None
 
         success_200 = {"result": "Success",
-                       "jwt": create_access_token(_userId),
-                       "image-url": ImageUrl_}
+                       "jwt": create_access_token(_userId)}
         user_in_list = connect.db.user.find_one({"userId": _userId})
-        signUp = {"profileImage": ImageUrl_,
+        signUp = {"profileImage": "/uploads/normal.png",
                   "profileName": _name,
                   "userId": _userId,
                   "wentspot": [
@@ -36,14 +27,14 @@ class SocialLogin(Resource):
                       }
                   ]}
 
+# connect.db.user.update({"name": _userId}, {"$set": {"profileImage": ImageUrl_}})
+
         if user_in_list:
-            if _picture:
-                connect.db.user.update({"name": _userId}, {"$set": {"profileImage": ImageUrl_}})
-            return success_200, 200
+            return success_200, 200     # Success!
 
-        elif not user_in_list and _userId and _name and _picture:
+        elif not user_in_list and _userId and _name:
             connect.in_user.insert(signUp)
-            return success_200, 200
+            return success_200, 200     # DB에 userId가 없지만 userId와 name이 들어온 경우 - 회원가입
 
-        elif not (_userId and _name and _picture):
-            return {"result": "I am a teapot"}, 418
+        elif not user_in_list and _name:
+            return {"result": "I am a teapot"}, 418     # How wonderful!
