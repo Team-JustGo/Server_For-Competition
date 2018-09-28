@@ -485,3 +485,215 @@ Traceback (most recent call last):
     "jwt": create_access_token(_userId,expires_delta=),
                                                      ^
 SyntaxError: invalid syntax
+Traceback (most recent call last):
+  File "RunServer.py", line 6, in <module>
+    from app_N.resources.Login import SocialLogin
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 39
+    elif not user_in_list and _name):
+                                   ^
+SyntaxError: invalid syntax
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 63, in apport_excepthook
+    from apport.fileutils import likely_packaged, get_recent_crashes
+  File "/usr/lib/python3/dist-packages/apport/__init__.py", line 5, in <module>
+    from apport.report import Report
+  File "/usr/lib/python3/dist-packages/apport/report.py", line 30, in <module>
+    import apport.fileutils
+  File "/usr/lib/python3/dist-packages/apport/fileutils.py", line 23, in <module>
+    from apport.packaging_impl import impl as packaging
+  File "/usr/lib/python3/dist-packages/apport/packaging_impl.py", line 23, in <module>
+    import apt
+  File "/usr/lib/python3/dist-packages/apt/__init__.py", line 23, in <module>
+    import apt_pkg
+ModuleNotFoundError: No module named 'apt_pkg'
+
+Original exception was:
+Traceback (most recent call last):
+  File "RunServer.py", line 6, in <module>
+    from app_N.resources.Login import SocialLogin
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 39
+    elif not user_in_list and _name):
+                                   ^
+SyntaxError: invalid syntax
+ * Serving Flask app "RunServer" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:7777/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+66.249.82.201 - - [28/Sep/2018 11:01:10] "GET / HTTP/1.1" 404 -
+66.249.82.201 - - [28/Sep/2018 11:01:10] "GET /favicon.ico HTTP/1.1" 404 -
+66.249.82.201 - - [28/Sep/2018 11:02:18] "GET / HTTP/1.1" 404 -
+66.249.82.201 - - [28/Sep/2018 11:02:21] "GET /api HTTP/1.1" 404 -
+110.70.56.237 - - [28/Sep/2018 11:03:22] "GET /uploads/normal.png HTTP/1.1" 404 -
+110.70.56.237 - - [28/Sep/2018 11:03:22] "GET /favicon.ico HTTP/1.1" 404 -
+110.70.56.237 - - [28/Sep/2018 11:03:31] "GET /uploads/normal.PNG HTTP/1.1" 404 -
+110.70.56.237 - - [28/Sep/2018 11:03:37] "GET /uploads/normal.PNG HTTP/1.1" 404 -
+175.223.3.70 - - [28/Sep/2018 11:05:57] "POST /api/user/login HTTP/1.1" 400 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+175.223.3.70 - - [28/Sep/2018 11:07:08] "POST /api/user/login HTTP/1.1" 400 -
+110.70.56.226 - - [28/Sep/2018 15:02:00] "POST /api/user/login HTTP/1.1" 200 -
+110.70.56.226 - - [28/Sep/2018 15:02:53] "POST /api/user/login HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileImage.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileImage.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+110.70.56.226 - - [28/Sep/2018 15:35:42] "POST /api/user/login HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+110.70.56.226 - - [28/Sep/2018 15:41:38] "POST /api/user/login HTTP/1.1" 200 -
+110.70.56.226 - - [28/Sep/2018 15:42:30] "POST /api/user/login HTTP/1.1" 418 -
+110.70.56.226 - - [28/Sep/2018 15:44:14] "POST /api/user/login HTTP/1.1" 200 -
+110.70.56.226 - - [28/Sep/2018 15:46:44] "PUT /api/user/profile-image HTTP/1.1" 400 -
+110.70.56.226 - - [28/Sep/2018 15:47:21] "PUT /api/user/profile-image HTTP/1.1" 205 -
+110.70.56.226 - - [28/Sep/2018 15:47:41] "GET /uploads/common-image.jpg HTTP/1.1" 200 -
+110.70.56.226 - - [28/Sep/2018 15:47:42] "GET /favicon.ico HTTP/1.1" 404 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+110.70.56.226 - - [28/Sep/2018 15:51:03] "POST /api/user/login HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+110.70.56.226 - - [28/Sep/2018 15:53:56] "POST /api/user/login HTTP/1.1" 418 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+58.233.237.37 - - [28/Sep/2018 16:04:30] "POST /api/user/login HTTP/1.1" 418 -
+58.233.237.37 - - [28/Sep/2018 16:04:30] "POST /api/user/login HTTP/1.1" 418 -
+58.233.237.37 - - [28/Sep/2018 16:04:30] "POST /api/user/login HTTP/1.1" 418 -
+58.233.237.37 - - [28/Sep/2018 16:04:35] "GET /api/user/login HTTP/1.1" 405 -
+58.233.237.37 - - [28/Sep/2018 16:04:35] "GET /favicon.ico HTTP/1.1" 404 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileImage.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+110.70.56.226 - - [28/Sep/2018 16:14:45] "PUT /api/user/profile-image HTTP/1.1" 205 -
+110.70.56.226 - - [28/Sep/2018 16:15:28] "GET /uploads/cheyook.jpg HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileImage.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileImage.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileImage.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileImage.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileImage.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileImage.py', reloading
+ * Restarting with stat
+Traceback (most recent call last):
+  File "RunServer.py", line 8, in <module>
+    from app_N.resources.ProfileImage import ChangeProfileImage
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileImage.py", line 27
+    if 
+      ^
+SyntaxError: invalid syntax
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 63, in apport_excepthook
+    from apport.fileutils import likely_packaged, get_recent_crashes
+  File "/usr/lib/python3/dist-packages/apport/__init__.py", line 5, in <module>
+    from apport.report import Report
+  File "/usr/lib/python3/dist-packages/apport/report.py", line 30, in <module>
+    import apport.fileutils
+  File "/usr/lib/python3/dist-packages/apport/fileutils.py", line 23, in <module>
+    from apport.packaging_impl import impl as packaging
+  File "/usr/lib/python3/dist-packages/apport/packaging_impl.py", line 23, in <module>
+    import apt
+  File "/usr/lib/python3/dist-packages/apt/__init__.py", line 23, in <module>
+    import apt_pkg
+ModuleNotFoundError: No module named 'apt_pkg'
+
+Original exception was:
+Traceback (most recent call last):
+  File "RunServer.py", line 8, in <module>
+    from app_N.resources.ProfileImage import ChangeProfileImage
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileImage.py", line 27
+    if 
+      ^
+SyntaxError: invalid syntax
+ * Serving Flask app "RunServer" (lazy loading)
+ * Environment: production
+   WARNING: Do not use the development server in a production environment.
+   Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:7777/ (Press CTRL+C to quit)
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+110.70.56.226 - - [28/Sep/2018 16:54:33] "POST /api/user/login HTTP/1.1" 418 -
+110.70.56.226 - - [28/Sep/2018 16:56:07] "PUT /api/user/profile-image HTTP/1.1" 205 -
+110.70.56.226 - - [28/Sep/2018 16:57:33] "GET /uploads/C0FD8C21-9183-46AE-A251-1A287F365792.png HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileImage.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+110.70.56.226 - - [28/Sep/2018 17:02:34] "PUT /api/user/profile-image HTTP/1.1" 205 -
+110.70.56.226 - - [28/Sep/2018 17:02:54] "PUT /api/user/profile-image HTTP/1.1" 205 -
+110.70.56.226 - - [28/Sep/2018 17:03:18] "PUT /api/user/profile-image HTTP/1.1" 205 -
+110.70.56.226 - - [28/Sep/2018 17:03:56] "GET /uploads/by09115.jpg HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/TourSpot.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+110.70.56.226 - - [28/Sep/2018 17:11:55] "PUT /api/user/profile-name HTTP/1.1" 205 -
+110.70.56.226 - - [28/Sep/2018 17:14:13] "PUT /api/user/tour-spot HTTP/1.1" 405 -
+110.70.56.226 - - [28/Sep/2018 17:14:23] "POST /api/user/tour-spot HTTP/1.1" 422 -
+110.70.56.226 - - [28/Sep/2018 17:14:48] "POST /api/user/login HTTP/1.1" 200 -
+110.70.56.226 - - [28/Sep/2018 17:15:08] "POST /api/user/tour-spot HTTP/1.1" 205 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/ProfileName.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+110.70.56.226 - - [28/Sep/2018 17:17:15] "POST /api/user/tour-spot HTTP/1.1" 205 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/TourSpot.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+110.70.56.226 - - [28/Sep/2018 17:25:48] "POST /api/user/login HTTP/1.1" 200 -
+110.70.56.226 - - [28/Sep/2018 17:26:13] "POST /api/user/tour-spot HTTP/1.1" 422 -
+110.70.56.226 - - [28/Sep/2018 17:26:29] "POST /api/user/tour-spot HTTP/1.1" 205 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/TourSpot.py', reloading
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 174-450-458
+110.70.56.226 - - [28/Sep/2018 17:28:03] "POST /api/user/tour-spot HTTP/1.1" 205 -
+110.70.56.226 - - [28/Sep/2018 17:28:27] "POST /api/user/tour-spot HTTP/1.1" 205 -
+110.70.56.226 - - [28/Sep/2018 17:30:09] "POST /api/user/login HTTP/1.1" 200 -
+110.70.56.226 - - [28/Sep/2018 17:31:05] "PUT /api/user/profile-image HTTP/1.1" 205 -
+110.70.56.226 - - [28/Sep/2018 17:31:35] "GET /uploads/unnamed.png HTTP/1.1" 200 -

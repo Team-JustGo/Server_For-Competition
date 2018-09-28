@@ -15,15 +15,25 @@ class ChangeProfileImage(Resource):
         parser.add_argument('profile-image', type=werkzeug.FileStorage, required=True, location='files')
         _parsed = parser.parse_args()
         _profile_image = _parsed['profile-image']
+        # temp = '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/FileHAM' + _profile_image.filename
+
         filename = secure_filename(_profile_image.filename)
         connect.saveinfo(_profile_image, filename)
-        ImageUrl = connect.ImageUrl(filename)
+        image_url = connect.ImageUrl(filename)
         token_to_user = get_jwt_identity()
-        userId_in_lists = connect.db.user.find_one({"userId": token_to_user})
+        user_id_in_lists = connect.db.user.find_one({"userId": token_to_user})
 
-        if userId_in_lists:
-            connect.db.user.update({"name": token_to_user}, {"$set": {"profileImage": ImageUrl}})
-            return {"result": "Success"}, 205       # return the status code 205 and "Success"
+        if user_id_in_lists:
 
-        elif not userId_in_lists:
-            return {"result": "Failure"}, 404       # OTL... It was failed...
+            before_file = list(connect.db.user.find({"userId": token_to_user}, {"profileImage": 1, "_id": 0}))[0].get('profileImage')
+            before_file_root = '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/FileHAM' + before_file[8:]
+
+            if os.path.isfile(before_file_root):
+                os.remove(before_file_root)
+
+            connect.db.user.update({"userId": token_to_user}, {"$set": {"profileImage": image_url}})
+            return {"result": "Success",
+                    "uri": image_url}, 205  # return the status code 205 and "Success"
+
+        elif not user_id_in_lists:
+            return {"result": "Failure"}, 404  # OTL... It was failed...

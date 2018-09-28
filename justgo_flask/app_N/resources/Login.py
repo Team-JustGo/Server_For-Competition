@@ -18,23 +18,20 @@ class SocialLogin(Resource):
         success_200 = {"result": "Success",
                        "jwt": create_access_token(_userId)}
         user_in_list = connect.db.user.find_one({"userId": _userId})
-        signUp = {"profileImage": "/uploads/normal.png",
-                  "profileName": _name,
-                  "userId": _userId,
-                  "wentspot": [
-                      {
-                          "tourId": "Undefined"
-                      }
-                  ]}
+
 
 # connect.db.user.update({"name": _userId}, {"$set": {"profileImage": ImageUrl_}})
 
         if user_in_list:
             return success_200, 200     # Success!
 
-        elif not user_in_list and _userId and _name:
-            connect.in_user.insert(signUp)
-            return success_200, 200     # DB에 userId가 없지만 userId와 name이 들어온 경우 - 회원가입
+        elif not user_in_list:
 
-        elif not (_userId and _name):
-            return {"result": "I am a teapot"}, 418
+            if _userId and _name:      # DB에 userId가 없지만 userId와 name이 들어온 경우 - 회원가입
+                connect.db.user.insert({"profileImage": "uploads/common-image.jpg",
+                                        "profileName": _name,
+                                        "userId": _userId,
+                                        "wentspot": []})
+                return success_200, 200
+
+            return {"result": "I am a teapot"}, 418  # How wonderful!
