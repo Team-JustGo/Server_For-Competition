@@ -16,7 +16,7 @@ class ProfileInfo(Resource):
 
         if user_list:
             all_var = \
-                list(connect.db.user.find({"userId": "by09115"}, {"profileImage": 1, "profileName": 1, "_id": 0}))[0]
+                list(connect.db.user.find({"userId": id_token}, {"profileImage": 1, "profileName": 1, "_id": 0}))[0]
             userName = all_var.get('profileName')
             userImage = all_var.get('profileImage')
             return {

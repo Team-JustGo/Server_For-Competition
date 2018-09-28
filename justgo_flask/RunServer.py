@@ -24,6 +24,7 @@ app.config['JSON_AS_ASCII'] = False
 jwt = JWTManager(app)
 api = Api(app)
 
+
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
