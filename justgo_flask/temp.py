@@ -11,6 +11,6 @@ print(etcvar)
 
 # connect.db.user.update({"userId": "by09115"}, {"$set": {"wentspot": [{"tourId": "문화마을아파트"}]}})
 
-etcvar2 = list(connect.db.user.find({"userId": "by09115"}, {"profileImage": 1, "profileName": 1, "_id": 0}))[0]
+etcvar2 = (list(connect.db.user.find({"userId": "by09115"}, {"profileImage": 1, "profileName": 1, "_id": 0}))[0].get('profile')
 
 print(etcvar2)
