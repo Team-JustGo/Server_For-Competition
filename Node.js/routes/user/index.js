@@ -26,7 +26,7 @@ router.put('/:id/profile-image', upload.array('picture'), (req, res) => {
     url: 'http://ec2-52-79-240-33.ap-northeast-2.compute.amazonaws.com:7777/api/user/profile-image',
     method: 'PUT',
     headers: {
-      'X-Access-Token': `bearer ${jwt}`,
+      Authentication: `bearer ${jwt}`,
     },
     formData: {
       'profile-image': image,
@@ -45,7 +45,7 @@ router.put('/:id/profile-name', (req, res) => {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
-      'X-Access-Token': `bearer ${jwt}`,
+      Authentication: `bearer ${jwt}`,
     },
     body: {
       name,
@@ -64,7 +64,7 @@ router.post('/tour-spot', (req, res) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Access-Token': `bearer ${jwt}`,
+      Authentication: `bearer ${jwt}`,
     },
     body: {
       tourId,
