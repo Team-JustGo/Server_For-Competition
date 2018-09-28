@@ -84,7 +84,7 @@ const getList = function getTourAttractionListByTheme(req, res) {
     json: true,
   };
 
-  let tourList = [];
+  const tourList = [];
   let thingsToRequest = themeArr.length;
 
   themeArr.forEach((t) => {
@@ -266,7 +266,7 @@ const getInfo = async function getInfoWithId(req, res) {
     theme: placeInfo.types.toString(),
     nearSpot,
     nearRestaurant,
-    comment: place.comment,
+    comment: place ? place.comment : [],
   });
 };
 
