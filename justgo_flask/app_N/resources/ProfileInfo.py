@@ -19,7 +19,7 @@ def as_json(f):
 
 class ProfileInfo(Resource):
 
-    @wraps()
+    @as_json
     @jwt_required
     def get(self):
         id_token = get_jwt_identity()
