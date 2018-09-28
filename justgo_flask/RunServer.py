@@ -19,6 +19,7 @@ app.config['SECRET_KEY'] = "ASDFGH"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 저장 가능한 파일의 최대 크기 = 16MiB
 app.config['JWT_ACCESS_TOKEN_EXPIRES'] = False
+app.config['JSON_AS_ASCII'] = False
 
 jwt = JWTManager(app)
 api = Api(app)
