@@ -17,6 +17,7 @@ tourspot = db.tourspot.find()
 
 ALLOWED_EXTENSIONS = set(['jpg', 'jpeg', 'bmp', 'gif', 'png'])
 
+
 def saveinfo(announce, filename):
     announce.save(os.path.join(current_app.config['UPLOAD_FOLDER'], filename))
 
