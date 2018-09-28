@@ -205,7 +205,7 @@ const getDirection = function getDirectionForEachTransport(req, res) {
 
 const getInfo = async function getInfoWithId(req, res) {
   const { id } = req.params;
-  const place = await TourSpot.findOne({ placeid: id });
+  const place = await TourSpot.findOne({ placeid: id }).select('comment.rate comment.content');
   let requestOption = {
     url: 'https://maps.googleapis.com/maps/api/place/details/json',
     method: 'GET',
@@ -264,9 +264,9 @@ const getInfo = async function getInfoWithId(req, res) {
     address: placeInfo.formatted_address,
     image: placeInfo.icon, // TODO: 이미지로 변환하기
     theme: placeInfo.types.toString(),
+    comment: place ? place.comment : [],
     nearSpot,
     nearRestaurant,
-    comment: place ? place.comment : [],
   });
 };
 
