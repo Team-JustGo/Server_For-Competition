@@ -90,46 +90,36 @@ const getList = function getTourAttractionListByTheme(req, res) {
   themeArr.forEach((t) => {
     requestOption.qs.type = t;
     rp(requestOption)
-      .then((result) => {
+      .then(async (result) => {
         const data = result.results;
-        for(const e in data) {
-          if (data[e].types.every(pt => !avoidThemeArr.includes(pt))) {
-            /* const placeInfo = await TourSpot.findOne({ placeid: data[e].place_id });
-            if (placeInfo === null) {
-              const newSpot = new TourSpot({
-                placeid: data[e].place_id,
-                name: data[e].name,
-                address: data[e].vicinity,
-                image: data[e].icon, // TODO: 이미지로 변경하기
-                theme: data[e].types.toString(),
-                lat: data[e].geometry.location.lat,
-                lng: data[e].geometry.location.lng,
-                comment: [],
-              });
-              newSpot.save();
-            } */
+        data.forEach((e) => {
+          if (e.types.every(pt => !avoidThemeArr.includes(pt))) {
             const place = {
-              placeid: data[e].place_id,
-              lat: data[e].geometry.location.lat,
-              lng: data[e].geometry.location.lng,
-              rate: data[e].rating,
-              theme: data[e].types.toString(),
+              placeid: e.place_id,
+              lat: e.geometry.location.lat,
+              lng: e.geometry.location.lng,
+              rate: e.rating,
+              theme: e.types.toString(),
             };
             tourList.push(place);
           }
-        }
-        // TODO: 코멘트 $or 로 찾고 place에 넣고 response 전송
-        //const comments = TourSpot.find()
+        });
         thingsToRequest -= 1;
         if (thingsToRequest !== 0) return;
+        // Get Distance
         tourList.forEach((e, index) => {
           const distance = getDistance(lat, lng, e.lat, e.lng) * 1000;
           if (distance <= minDistance) tourList.splice(index, 1);
           else e.distance = distance;
         });
+        // Get Comments
+        const comments = await TourSpot.find({ placeid: { $in: tourList.map(e => e.placeid) } });
+        comments.forEach((c) => {
+          tourList[tourList.findIndex(e => e.placeid === c.placeid)].comment = c.comment[0].content;
+        });
         res.status(200).json({
           result: 'success',
-          iist: tourList,
+          list: tourList,
         });
       });
   });
@@ -228,13 +218,13 @@ const getInfo = async function getInfoWithId(req, res) {
   };
   const placeInfo = (await rp(requestOption)).result;
   requestOption = {
-    url: `http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?MobileOS=ETC&MobileApp=Justgo&ServiceKey=${config.TOUR_API_KEY}&mapX=${place.lng}&mapY=${place.lat}&radius=1000&_type=json`,
+    url: `http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?MobileOS=ETC&MobileApp=Justgo&ServiceKey=${config.TOUR_API_KEY}&mapX=${placeInfo.geometry.location.lng}&mapY=${placeInfo.geometry.location.lat}&radius=1000&_type=json`,
     method: 'GET',
     json: true,
-  }
-  const nearTourSpot = (await rp(requestOption)).response.body.items.item;;
+  };
+  const nearTourSpot = (await rp(requestOption)).response.body.items.item;
   const nearSpot = [];
-  // TODO: API-Docs에서 nearSpot response 수정하기
+  // TODO: API-Docs에서 nearSpot response 수정하기, 안드로이드 모델 봐주기
   nearTourSpot.forEach(e => nearSpot.push({
     title: e.title,
     image: e.firstimage,
@@ -251,7 +241,7 @@ const getInfo = async function getInfoWithId(req, res) {
     },
     qs: {
       key: config.GOOGLE_MAP_KEY,
-      location: `${place.lat},${place.lng}`,
+      location: `${placeInfo.geometry.location.lat},${placeInfo.geometry.location.lng}`,
       radius: 1000,
       language: 'ko',
       type: 'restaurant',
@@ -272,11 +262,11 @@ const getInfo = async function getInfoWithId(req, res) {
     result: 'success',
     name: placeInfo.name,
     address: placeInfo.formatted_address,
-    image: placeInfo.icon, // TODO: 고치기
+    image: placeInfo.icon, // TODO: 이미지로 변환하기
     theme: placeInfo.types.toString(),
     nearSpot,
     nearRestaurant,
-    comment: place.comment,
+    comment: place ? place.comment : [],
   });
 };
 
@@ -287,12 +277,13 @@ const postComment = function postCommentAtPlace(req, res) {
     const payload = jwt.verify(req.get('X-Access-Token'), config.SALT);
     TourSpot.findOneAndUpdate(
       { placeid: id },
-      { $push: { comment: { userId: payload.id, rate, content } } }
+      { $push: { comment: { userId: payload.id, rate, content } } },
+      { upsert: true },
     )
       .then(() => res.status(201).json({ result: 'success' }))
       .catch(() => res.status(500).json({ result: 'failure' }));
   } catch (e) {
-    res.status(403).send({ result: 'failure' });
+    res.status(403).send({ result: 'failure', e });
   }
 };
 

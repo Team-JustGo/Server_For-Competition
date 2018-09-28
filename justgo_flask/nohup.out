@@ -697,3 +697,36 @@ SyntaxError: invalid syntax
 110.70.56.226 - - [28/Sep/2018 17:30:09] "POST /api/user/login HTTP/1.1" 200 -
 110.70.56.226 - - [28/Sep/2018 17:31:05] "PUT /api/user/profile-image HTTP/1.1" 205 -
 110.70.56.226 - - [28/Sep/2018 17:31:35] "GET /uploads/unnamed.png HTTP/1.1" 200 -
+ * Detected change in '/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py', reloading
+ * Restarting with stat
+Traceback (most recent call last):
+  File "RunServer.py", line 6, in <module>
+    from app_N.resources.Login import SocialLogin
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 1
+    <<<<<<< HEAD
+     ^
+SyntaxError: invalid syntax
+Error in sys.excepthook:
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/apport_python_hook.py", line 63, in apport_excepthook
+    from apport.fileutils import likely_packaged, get_recent_crashes
+  File "/usr/lib/python3/dist-packages/apport/__init__.py", line 5, in <module>
+    from apport.report import Report
+  File "/usr/lib/python3/dist-packages/apport/report.py", line 30, in <module>
+    import apport.fileutils
+  File "/usr/lib/python3/dist-packages/apport/fileutils.py", line 23, in <module>
+    from apport.packaging_impl import impl as packaging
+  File "/usr/lib/python3/dist-packages/apport/packaging_impl.py", line 23, in <module>
+    import apt
+  File "/usr/lib/python3/dist-packages/apt/__init__.py", line 23, in <module>
+    import apt_pkg
+ModuleNotFoundError: No module named 'apt_pkg'
+
+Original exception was:
+Traceback (most recent call last):
+  File "RunServer.py", line 6, in <module>
+    from app_N.resources.Login import SocialLogin
+  File "/home/ubuntu/Server_For-Competition_Jaehoon/Server_For-Competition/justgo_flask/app_N/resources/Login.py", line 1
+    <<<<<<< HEAD
+     ^
+SyntaxError: invalid syntax
