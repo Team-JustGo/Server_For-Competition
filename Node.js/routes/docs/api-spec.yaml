@@ -72,6 +72,29 @@ paths:
           schema:
             $ref: '#/definitions/Main'
       deprecated: true
+  /user/profile:
+    get:
+      tags:
+      - user
+      summary: 프로필 정보 얻기
+      description: jwt에 맞는 유저의 프로필 얻기
+      operationId: getProfile
+      consumes:
+      - application/json
+      - application/x-www-formurlencoded
+      produces:
+      - application/json
+      parameters:
+      - in: header
+        name: X-Access-Token
+        type: string
+        description: JWT
+        required: true
+      responses:
+        200:
+          description: 요청 성공
+          schema:
+            $ref: '#/definitions/Profile'
   /user/profile-image:
     put:
       tags:
@@ -136,6 +159,25 @@ paths:
           schema:
             $ref: '#/definitions/Result'
   /user/tour-spot:
+    get:
+      tags:
+      - user
+      summary: 다녀온 장소 얻기
+      description: 유저가 다녀온 장소를 얻기
+      operationId: getWentSpot
+      produces:
+      - application/json
+      parameters:
+      - name: X-Access Token
+        in: header
+        type: string
+        required: true
+        description: JWT
+      responses:
+        200:
+          description: 요청 성공
+          schema:
+            $ref: '#/definitions/WentSpot'
     post:
       tags:
       - user
@@ -411,6 +453,26 @@ definitions:
               type: string
             tourImage:
               type: string
+  Profile:
+    type: object
+    properties:
+      profileName:
+        type: string
+      profileImage:
+        type: string
+  WentSpot:
+    type: array
+    items:
+      type: object
+      properties:
+        date:
+          type: string
+        placeid:
+          type: string
+        name:
+          type: string
+        tags:
+          type: string
   TourList:
     type: object
     properties:
