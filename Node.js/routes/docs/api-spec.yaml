@@ -39,10 +39,6 @@ paths:
         name: name
         type: string
         description: 닉네임
-      - in: formData
-        name: picture
-        type: file
-        description: 사진
       responses:
         418:
           description: 회원가입 정보가 필요함
@@ -157,7 +153,7 @@ paths:
         type: string
         required: true
         description: JWT
-      - name: tourId
+      - name: placeid
         in: formData
         type: string
         required: true
@@ -444,6 +440,19 @@ definitions:
     properties:
       result:
         type: string
+      point:
+        type: array
+        items:
+          type: object
+          properties:
+            lat:
+              type: number
+            lng:
+              type: number
+            instruction:
+              type: number
+      polyline:
+        type: string
   PlaceInfo:
     type: object
     properties:
@@ -492,9 +501,7 @@ definitions:
         items:
           type: object
           properties:
-            profileImage:
-              type: string
-            profileName:
+            tags:
               type: string
             rate:
               type: number
