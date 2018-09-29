@@ -166,11 +166,21 @@ const getDirection = function getDirectionForEachTransport(req, res) {
         .then((data) => {
           const result = JSON.parse(data).routes[0];
           const pointArr = [];
-          result.legs[0].steps.forEach(e => pointArr.push({
-            lat: e.start_location.lat,
-            lng: e.start_location.lng,
-            instruction: e.html_instructions,
-          }));
+          result.legs[0].steps.forEach((e) => {
+            pointArr.push({
+              lat: e.start_location.lat,
+              lng: e.start_location.lng,
+              instruction: e.travel_mode === 'TRANSIT'
+                ? `${e.transit_details.departure_stop.name}에서 ${e.transit_details.line.short_name} ${e.html_instructions}을 타고 ${e.transit_details.arrival_stop.name}에서 하차`
+                : e.html_instructions,
+              mode: e.travel_mode,
+            });
+          });
+          pointArr.push({
+            lat: result.legs[0].end_location.lat,
+            lng: result.legs[0].end_location.lng,
+            instruction: '도착',
+          });
           res.status(200).json({
             points: pointArr,
             polyline: result.overview_polyline.points,
@@ -224,7 +234,6 @@ const getInfo = async function getInfoWithId(req, res) {
   };
   const nearTourSpot = (await rp(requestOption)).response.body.items.item;
   const nearSpot = [];
-  // TODO: API-Docs에서 nearSpot response 수정하기, 안드로이드 모델 봐주기
   nearTourSpot.forEach(e => nearSpot.push({
     title: e.title,
     image: e.firstimage,
