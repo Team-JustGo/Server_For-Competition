@@ -4,3 +4,4 @@ config.js
 .idea
 justgo_flask/FileHAM
 nohup.out
+test/
