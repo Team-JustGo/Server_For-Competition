@@ -16,9 +16,7 @@ app.use(logger('common', { stream: fs.createWriteStream('justgo_server.log', { f
   .use(bodyParser.urlencoded({
     extended: true,
   }))
-  .use('/index', express.static('public/index.html'))
-  .use('/privacy', express.static('public/privacy.html'))
-  .use('/terms', express.static('public/terms.html'))
+  .use('/', express.static('public'))
   .use('/api', require('./routes'));
 
 app.listen(8080);
