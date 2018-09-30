@@ -2,6 +2,7 @@ const rp = require('request-promise');
 const jwt = require('jsonwebtoken');
 const config = require('../../config');
 const TourSpot = require('../../models/tourspot');
+const polyline = require('@mapbox/polyline');
 
 /* https://www.movable-type.co.uk/scripts/latlong.html */
 const degToRad = deg => deg * (Math.PI / 180);
@@ -19,7 +20,7 @@ const getDistance = function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
 
 // TODO: Polyline 인코딩 오류 고치기
 // https://developers.google.com/maps/documentation/utilities/polylinealgorithm
-const encoding = function encodingToPolyLineAlgorithm(coordinates) {
+/* const encoding = function encodingToPolyLineAlgorithm(coordinates) {
   let polyline = '';
   coordinates.forEach((e, index, originArr) => {
     // 1, 2, 3, 4
@@ -35,32 +36,32 @@ const encoding = function encodingToPolyLineAlgorithm(coordinates) {
       n = parseInt(n / 32, 10);
     }
     // 8, 9, 10, 11
-    polyline += arr.map((char, i) => String.fromCharCode(i === arr.length - 1 ? char + 63 : (char | 0x20) + 63)).toString().replace(/,/gi, '');
+    polyline += arr
+      .map((char, i) => String.fromCharCode(i === arr.length - 1 ? char + 63 : (char | 0x20) + 63))
+      .toString()
+      .replace(/,/gi, '');
   });
 
   return polyline;
-};
+}; */
 
-const tmapParse = function tmapParseWithResult(result) {
+const tmapParse = function tmapParseWithResult(result, mode) {
   const coordinates = [];
   const pointArr = [];
   result.features.forEach((e) => {
-    if (e.geometry.type === 'LineString') {
-      e.geometry.coordinates.forEach((coor) => {
-        coordinates.push(coor[1]);
-        coordinates.push(coor[0]);
-      });
-    } else if (e.geometry.type === 'Point') {
+    if (e.geometry.type === 'LineString') e.geometry.coordinates.forEach(coor => coordinates.push([coor[1], coor[0]]));
+    else if (e.geometry.type === 'Point') {
       pointArr.push({
         instruction: e.properties.description,
         lat: e.geometry.coordinates[1],
         lng: e.geometry.coordinates[0],
+        mode,
       });
     }
   });
   return {
     points: pointArr,
-    polyline: encoding(coordinates),
+    polyline: polyline.encode(coordinates),
   };
 };
 
@@ -148,7 +149,9 @@ const getDirection = function getDirectionForEachTransport(req, res) {
         },
       };
       rp(requestOption)
-        .then(data => res.status(200).json(tmapParse(JSON.parse(data))));
+        .then(data => res.status(200).json(tmapParse(JSON.parse(data), 'DRIVING')))
+        .catch(e => res.status(e.statusCode || 500).json({ result: 'failure', message: e.message || '' }));
+
       break;
     case 1: // 대중교통
       requestOption = {
@@ -185,7 +188,7 @@ const getDirection = function getDirectionForEachTransport(req, res) {
             points: pointArr,
             polyline: result.overview_polyline.points,
           });
-        });
+        }).catch(e => res.status(500).json({ result: 'failure', e }));
       break;
     case 2: // 도보
       requestOption = {
@@ -205,7 +208,8 @@ const getDirection = function getDirectionForEachTransport(req, res) {
         },
       };
       rp(requestOption)
-        .then(data => res.status(200).json(tmapParse(JSON.parse(data))));
+        .then(data => res.status(200).json(tmapParse(JSON.parse(data), 'WALKING')))
+        .catch(e => res.status(e.statusCode || 500).json({ result: 'failure', message: e.message || '' }));
       break;
     default:
       res.status(405).json({ result: 'failure' });
