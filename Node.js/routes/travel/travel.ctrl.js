@@ -45,6 +45,21 @@ const getDistance = function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
   return polyline;
 }; */
 
+const getRequestOption = function getReuqestOptionWithType(lat, lng, maxDistance, t) {
+  return {
+    url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
+    method: 'GET',
+    qs: {
+      key: config.GOOGLE_MAP_KEY,
+      location: `${lat},${lng}`,
+      radius: maxDistance,
+      language: 'ko',
+      type: t,
+    },
+    json: true,
+  };
+};
+
 const tmapParse = function tmapParseWithResult(result, mode) {
   const coordinates = [];
   const pointArr = [];
@@ -66,63 +81,40 @@ const tmapParse = function tmapParseWithResult(result, mode) {
 };
 
 // TODO: 무조건 리팩토링 하기, ZERO_RESULT 처리하기, TourSpot/Comment 처리하기, Response 속도좀 높이기
-const getList = function getTourAttractionListByTheme(req, res) {
+const getList = async function getTourAttractionListByTheme(req, res) {
   const {
     lat, lng, theme, minDistance, maxDistance,
   } = req.query;
   const themeArr = theme.split(',').filter(e => e[0] !== '!');
   const avoidThemeArr = theme.split(',').filter(e => e[0] === '!').map(at => at.slice(1));
-  const requestOption = {
-    url: 'https://maps.googleapis.com/maps/api/place/nearbysearch/json',
-    method: 'GET',
-    qs: {
-      key: config.GOOGLE_MAP_KEY,
-      location: `${lat},${lng}`,
-      radius: maxDistance,
-      language: 'ko',
-      type: undefined,
-    },
-    json: true,
-  };
 
   const tourList = [];
-  let thingsToRequest = themeArr.length;
-
-  themeArr.forEach((t) => {
-    requestOption.qs.type = t;
-    rp(requestOption)
-      .then(async (result) => {
-        const data = result.results;
-        data.forEach((e) => {
-          if (e.types.every(pt => !avoidThemeArr.includes(pt))) {
-            const place = {
-              placeid: e.place_id,
-              lat: e.geometry.location.lat,
-              lng: e.geometry.location.lng,
-              rate: e.rating,
-              theme: e.types.toString(),
-            };
-            tourList.push(place);
-          }
-        });
-        thingsToRequest -= 1;
-        if (thingsToRequest !== 0) return;
-        // Get Distance
-        tourList.forEach((e, index) => {
-          const distance = getDistance(lat, lng, e.lat, e.lng) * 1000;
-          if (distance <= minDistance) tourList.splice(index, 1);
-          else e.distance = distance;
-        });
-        // Get Comments
-        const comments = await TourSpot.find({ placeid: { $in: tourList.map(e => e.placeid) } });
-        comments.forEach((c) => {
-          tourList[tourList.findIndex(e => e.placeid === c.placeid)].comment = c.comment[0].content;
-        });
-        res.status(200).json({
-          result: 'success',
-          list: tourList,
-        });
+  const results = [];
+  (await Promise.all(
+    themeArr.map(e => rp(getRequestOption(lat, lng, maxDistance, e))),
+  )).forEach(e => results.push(...e.results));
+  results.forEach((place) => {
+    const distance = getDistance(lat, lng,
+      place.geometry.location.lat, place.geometry.location.lng) * 1000;
+    if (place.types.every(pt => !avoidThemeArr.includes(pt)) && distance >= minDistance) {
+      tourList.push({
+        placeid: place.place_id,
+        lat: place.geometry.location.lat,
+        lng: place.geometry.location.lng,
+        rate: place.rating,
+        theme: place.types.toString(),
+        distance,
       });
+    }
+  });
+
+  const comments = await TourSpot.find({ placeid: { $in: tourList.map(e => e.placeid) } });
+  comments.forEach((c) => {
+    tourList[tourList.findIndex(e => e.placeid === c.placeid)].comment = c.comment[0].content;
+  });
+  res.status(200).json({
+    result: 'success',
+    list: tourList,
   });
 };
 
